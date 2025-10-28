@@ -64,3 +64,5 @@ end
 gem "devise", "~> 4.9"
 
 gem "pundit", "~> 2.5"
+
+gem 'acts_as_tenant'
