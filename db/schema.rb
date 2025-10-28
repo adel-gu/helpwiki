@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_10_28_104454) do
+ActiveRecord::Schema[8.0].define(version: 2025_10_28_110823) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -22,8 +22,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_28_104454) do
     t.datetime "remember_created_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "workspace_id", null: false
+    t.integer "role"
+    t.string "full_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["workspace_id"], name: "index_users_on_workspace_id"
   end
 
   create_table "workspaces", force: :cascade do |t|
@@ -32,4 +36,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_10_28_104454) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_foreign_key "users", "workspaces"
 end
