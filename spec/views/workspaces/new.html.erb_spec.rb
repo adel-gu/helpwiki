@@ -12,7 +12,6 @@ RSpec.describe "workspaces/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", workspaces_path, "post" do
-
       assert_select "input[name=?]", "workspace[name]"
 
       assert_select "input[name=?]", "workspace[subdomain]"
