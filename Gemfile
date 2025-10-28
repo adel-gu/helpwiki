@@ -62,3 +62,5 @@ group :development, :test do
   gem 'rspec-rails', '~> 8.0.0'
 end
 gem "devise", "~> 4.9"
+
+gem "pundit", "~> 2.5"
