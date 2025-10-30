@@ -1,4 +1,5 @@
 <aside class="flex h-full w-16 flex-col items-center gap-4 bg-sidebar-dark py-4">
+  <!-- Top sidebar icons -->
   <% sidebar_icons = %w[visibility notifications dashboard home group upload] %>
 
   <% sidebar_icons.each_with_index do |icon, i| %>
@@ -9,10 +10,22 @@
     </div>
   <% end %>
 
+  <!-- Down sidebar icons -->
+  <div class="mt-auto dropdown dropdown-right dropdown-end">
+    <!-- Trigger button -->
+    <div
+      tabindex="0"
+      role="button"
+      class="flex size-10 items-center justify-center rounded-lg text-white/80 transition-colors hover:bg-white/10 hover:text-white hover:cursor-pointer focus:bg-white/10"
+    >
+      <span class="material-symbols-outlined text-2xl">account_circle</span>
+    </div>
 
-  <div class="mt-auto flex flex-col items-center justify-center p-2">
-    <span class="material-symbols-outlined text-white/70" style="font-size: 24px;">account_circle</span>
+    <!-- Dropdown content -->
+    <%= render "shared/user_menu", user: current_user %>
   </div>
+
+
   <div class="flex flex-col items-center justify-center p-2">
     <span class="material-symbols-outlined text-white/70" style="font-size: 24px;">settings</span>
   </div>
