@@ -16,13 +16,22 @@
     <link rel="icon" href="/icon.png" type="image/png">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
 
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="font-display bg-white dark:bg-background-dark">
+    <div class="flex h-screen w-full flex-row relative">
+
+      <%= render "layouts/sidebar" %>
+
+      <main class="flex-1 overflow-y-auto">
+        <%= yield %>
+      </main>
+
+    </div>
   </body>
 </html>
