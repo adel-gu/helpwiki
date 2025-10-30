@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html data-theme="helpwiki">
+  <head>
+    <%= render "layouts/head" %>
+  </head>
+
+  <body class="font-display">
+    <div class="flex h-screen w-full flex-row relative">
+
+      <%= render "shared/sidebar" %>
+
+      <main class="flex-1 overflow-y-auto">
+        <%= yield %>
+      </main>
+
+    </div>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-class WorkspacesController < ApplicationController
+class App::WorkspacesController < App::BaseController
   before_action :set_workspace, only: %i[ show edit update destroy ]
 
   # GET /workspaces or /workspaces.json
