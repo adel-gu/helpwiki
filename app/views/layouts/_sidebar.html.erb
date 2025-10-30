@@ -1,0 +1,19 @@
+<aside class="flex h-full w-16 flex-col items-center gap-4 bg-sidebar-dark py-4">
+  <% sidebar_icons = %w[visibility notifications dashboard home group upload] %>
+
+  <% sidebar_icons.each_with_index do |icon, i| %>
+    <div class="flex flex-col items-center justify-center p-2">
+      <span class="material-symbols-outlined <%= i == 3 ? 'text-white bg-primary rounded-lg p-2' : 'text-white/70' %>" style="font-size: 24px;">
+        <%= icon %>
+      </span>
+    </div>
+  <% end %>
+
+
+  <div class="mt-auto flex flex-col items-center justify-center p-2">
+    <span class="material-symbols-outlined text-white/70" style="font-size: 24px;">account_circle</span>
+  </div>
+  <div class="flex flex-col items-center justify-center p-2">
+    <span class="material-symbols-outlined text-white/70" style="font-size: 24px;">settings</span>
+  </div>
+</aside>
