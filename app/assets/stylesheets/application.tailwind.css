@@ -1,12 +1,18 @@
 @import 'tailwindcss';
+@plugin "daisyui";
 
-/* Enable dark mode by class, just like before */
-@variant dark using=".dark";
+/* Daisyui tokens */
+@plugin "daisyui/theme" {
+  name: 'helpwiki';
+  default: true;
 
-/* Define your design tokens here */
-@theme {
   /* Colors */
   --color-primary: #3b82f6;
+}
+
+/* Tailwind tokens */
+@theme {
+  /* Colors */
   --color-sidebar-dark: #1f2937;
   --color-background-light: #f9fafb;
   --color-background-dark: #111721;
@@ -22,4 +28,8 @@
   --radius-lg: 0.5rem;
   --radius-xl: 0.75rem;
   --radius-full: 9999px;
+}
+
+@utility shadow-left {
+  box-shadow: -6px 6px 12px rgba(0, 0, 0, 0.15);
 }
