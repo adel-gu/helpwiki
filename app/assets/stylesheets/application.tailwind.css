@@ -1,1 +1,25 @@
-@import "tailwindcss";
+@import 'tailwindcss';
+
+/* Enable dark mode by class, just like before */
+@variant dark using=".dark";
+
+/* Define your design tokens here */
+@theme {
+  /* Colors */
+  --color-primary: #3b82f6;
+  --color-sidebar-dark: #1f2937;
+  --color-background-light: #f9fafb;
+  --color-background-dark: #111721;
+  --color-text-dark: #111827;
+  --color-text-medium: #6b7280;
+  --color-accent-red: #ef4444;
+
+  /* Font families */
+  --font-display: 'Inter', sans-serif;
+
+  /* Border radii */
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+}
