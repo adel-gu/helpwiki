@@ -2,32 +2,38 @@
 @plugin "daisyui";
 
 /* Daisyui tokens */
+
 @plugin "daisyui/theme" {
   name: 'helpwiki';
   default: true;
-
-  /* Colors */
+  prefersdark: false;
+  color-scheme: 'light';
+  --color-base-100: #ffffff;
+  --color-base-200: #f9fafb;
+  --color-base-300: #e5e7eb;
+  --color-base-content: #111827;
   --color-primary: #3b82f6;
-}
-
-/* Tailwind tokens */
-@theme {
-  /* Colors */
-  --color-sidebar-dark: #1f2937;
-  --color-background-light: #f9fafb;
-  --color-background-dark: #111721;
-  --color-text-dark: #111827;
-  --color-text-medium: #6b7280;
-  --color-accent-red: #ef4444;
-
-  /* Font families */
-  --font-display: 'Inter', sans-serif;
-
-  /* Border radii */
-  --radius: 0.25rem;
-  --radius-lg: 0.5rem;
-  --radius-xl: 0.75rem;
-  --radius-full: 9999px;
+  --color-primary-content: #f7f9fa;
+  --color-secondary: #6b7280;
+  --color-secondary-content: oklch(94% 0.028 342.258);
+  --color-accent: #111827;
+  --color-accent-content: oklch(92% 0.013 255.508);
+  --color-neutral: #1f2937;
+  --color-neutral-content: oklch(98% 0.003 247.858);
+  --color-info: oklch(74% 0.16 232.661);
+  --color-info-content: oklch(96% 0.007 247.896);
+  --color-success: oklch(76% 0.177 163.223);
+  --color-success-content: oklch(97% 0.021 166.113);
+  --color-warning: oklch(82% 0.189 84.429);
+  --color-warning-content: oklch(98% 0.022 95.277);
+  --color-error: oklch(71% 0.194 13.428);
+  --color-error-content: oklch(94% 0.03 12.58);
+  --radius-selector: 0.5rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1px;
+  --depth: 1;
+  --noise: 0;
 }
 
 @utility shadow-left {
