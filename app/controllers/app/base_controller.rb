@@ -9,7 +9,9 @@ class App::BaseController < ApplicationController
   private
 
     def set_tenant
-
+      subdomain = params[:subdomain]
+      workspace = Workspace.find_by!(subdomain: subdomain)
+      set_current_tenant(workspace)
     end
 
 end

@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   root "landing#index"
 
-  namespace :app do
-    root "home#index"
+  scope "/:subdomain" do
+    namespace :app do
+      root "home#index"
+    end
   end
+
+  resource :workspace, only: %i[new create]
 end

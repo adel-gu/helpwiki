@@ -3,6 +3,10 @@ class ApplicationController < ActionController::Base
   allow_browser versions: :modern
 
   def after_sign_in_path_for(resource)
-    app_root_path
+    if resource.workspace
+      app_root_path(resource.workspace.subdomain)
+    else
+      new_workspace_path
+    end
   end
 end
