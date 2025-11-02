@@ -1,4 +1,4 @@
-<%= form_with(model: workspace) do |form| %>
+<%= form_with(model: workspace, url: workspace_url) do |form| %>
   <% if workspace.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(workspace.errors.count, "error") %> prohibited this workspace from being saved:</h2>
