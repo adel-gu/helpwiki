@@ -15,8 +15,7 @@ class App::BaseController < ApplicationController
     end
 
     def ensure_user_in_workspace!
-      unless current_user.workspace_id == current_tenant.id
-        redirect_to app_root_path(current_user.workspace.subdomain), alert: "Access denied"
-      end
+      return redirect_to(new_workspace_path) unless current_user.workspace
+      redirect_to(app_root_path(current_user.workspace.subdomain)) if current_user.workspace_id != current_tenant.id
     end
 end
