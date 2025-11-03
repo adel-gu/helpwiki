@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     namespace :app do
       root "home#index"
 
-      resources :users_management, only: %i[ index update destroy ]
+      resources :users_management, except: %i[ show edit ]
     end
   end
 

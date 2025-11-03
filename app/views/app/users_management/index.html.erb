@@ -3,7 +3,7 @@
 <div class="flex justify-between items-center mb-8">
   <h1 class="text-4xl font-black text-text-dark tracking-[-0.033em]">User Management</h1>
 
-  <%= link_to app_root_path,
+  <%= link_to new_app_users_management_path,
     class: "flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold tracking-[0.015em]" do %>
     <span class="truncate">+ Invite User</span>
   <% end %>
@@ -36,6 +36,9 @@
                 <p class="text-sm font-bold text-base-content"><%= user.full_name %></p>
                 <p class="text-sm text-secondary"><%= user.email %></p>
               </div>
+              <% if user.invitation_sent_at && !user.invitation_accepted_at %>
+                <span class="ml-2 badge badge-warning">Pending</span>
+              <% end %>
             </div>
           </td>
 

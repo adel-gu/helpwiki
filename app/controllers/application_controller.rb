@@ -12,9 +12,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def after_accept_path_for(resource)
+    app_root_path(resource.workspace.subdomain)
+  end
+
   protected
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [ :full_name ])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [ :full_name ])
   end
 end
