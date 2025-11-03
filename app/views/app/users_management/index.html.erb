@@ -1,0 +1,83 @@
+
+<!-- Page Header -->
+<div class="flex justify-between items-center mb-8">
+  <h1 class="text-4xl font-black text-text-dark tracking-[-0.033em]">User Management</h1>
+
+  <%= link_to app_root_path,
+    class: "flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold tracking-[0.015em]" do %>
+    <span class="truncate">+ Invite User</span>
+  <% end %>
+</div>
+
+<!-- User Table -->
+<div class="overflow-x-auto">
+  <table class="min-w-full">
+    <thead class="bg-base-200">
+      <tr>
+        <th class="px-6 py-3 text-left text-xs font-medium text-text-medium uppercase tracking-wider">Name</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-text-medium uppercase tracking-wider">Role</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-text-medium uppercase tracking-wider">Date Joined</th>
+        <th class="px-6 py-3 text-left text-xs font-medium text-text-medium uppercase tracking-wider">Actions</th>
+      </tr>
+    </thead>
+
+    <tbody class="bg-white divide-y divide-base-300">
+      <% @users.each do |user| %>
+        <tr>
+          <!-- Name & Avatar -->
+          <td class="px-6 py-4 whitespace-nowrap">
+            <div class="flex items-center">
+              <div class="shrink-0 size-10">
+                <%= image_tag("https://ui-avatars.com/api/?name=#{user.full_name}&background=random",
+                    alt: "Avatar for #{user.full_name}",
+                    class: "size-10 rounded-full") %>
+              </div>
+              <div class="ml-4">
+                <p class="text-sm font-bold text-base-content"><%= user.full_name %></p>
+                <p class="text-sm text-secondary"><%= user.email %></p>
+              </div>
+            </div>
+          </td>
+
+          <!-- Role -->
+          <td class="px-6 py-4 whitespace-nowrap">
+            <%= form_with(model: user, url: app_users_management_path(current_tenant.subdomain, user), method: :patch, local: true) do |f| %>
+              <%= f.select :role,
+                options_for_select(User.roles.keys.map { |r| [r.titleize, r] }, user.role),
+                {},
+                class: "select w-36 rounded-md text-sm text-base-content",
+                onchange: "this.form.submit();"
+                %>
+            <% end %>
+          </td>
+
+          <!-- Date Joined -->
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-secondary">
+            <%= user.created_at.strftime("%b %d, %Y") %>
+          </td>
+
+          <!-- Actions -->
+          <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+            <div class="dropdown dropdown-left dropdown-center">
+              <button type="button"
+                      class="btn btn-ghost btn-xs text-secondary hover:text-base-content"
+                      tabindex="0">
+                <span class="material-symbols-outlined">more_horiz</span>
+              </button>
+
+              <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box w-36 p-2 shadow">
+                <li>
+                  <%= link_to "Remove User",
+                      app_users_management_path(current_tenant.subdomain, user),
+                      data: { turbo_method: :delete },
+                      class: "text-error" %>
+                </li>
+              </ul>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
