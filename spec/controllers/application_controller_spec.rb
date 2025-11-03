@@ -14,6 +14,5 @@ RSpec.describe ApplicationController, type: :controller do
 
       expect(subject.after_sign_in_path_for(user)).to eq(app_root_path(workspace.subdomain))
     end
-
   end
 end

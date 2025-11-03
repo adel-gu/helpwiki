@@ -3,5 +3,5 @@ class Workspace < ApplicationRecord
 
   validates :name, presence: true
   validates :subdomain, presence: true, uniqueness: true,
-                        format: { with: /\A[a-z0-9\-]+\z/, message: 'only allows lowercase letters, numbers, and hyphens' }
+                        format: { with: /\A[a-z0-9\-]+\z/, message: "only allows lowercase letters, numbers, and hyphens" }
 end
