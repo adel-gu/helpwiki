@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   scope "/:subdomain" do
     namespace :app do
       root "home#index"
+
+      resources :users_management, only: %i[ index update destroy ]
     end
   end
 
