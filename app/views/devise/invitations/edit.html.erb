@@ -1,0 +1,64 @@
+<div class="relative flex h-auto min-h-screen w-full flex-col items-center justify-center bg-base-200 p-4 font-display">
+  <div class="w-full max-w-md space-y-8">
+    <div class="flex flex-col items-center">
+      <p class="text-2xl font-bold text-brand-text-dark">Helpwiki</p>
+    </div>
+
+    <div class="w-full rounded-lg border border-base-300 bg-base-100 p-8 shadow-sm">
+      <!-- Header Section -->
+      <div class="mb-6 flex flex-col items-center">
+        <!-- Icon -->
+        <div class="flex h-16 w-16 items-center justify-center rounded-full bg-[#3B82F6]/10 mb-6">
+          <span class="material-symbols-outlined text-4xl text-[#3B82F6]">person_add</span>
+        </div>
+        <!-- Headline and Body Text -->
+        <h1 class="text-base-content text-3xl font-bold leading-tight text-center pb-2">You're Invited!</h1>
+        <p class="text-secondary text-base font-normal leading-normal text-center">Create your account to join the <span class="font-bold"><%= resource.workspace.name %></span> workspace.</p>
+      </div>
+
+      <%= form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put }) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <%= f.hidden_field :invitation_token, readonly: true %>
+
+        <% if f.object.class.require_password_on_accepting %>
+          <div class="space-y-6">
+          <!-- Name -->
+          <label class="flex flex-col">
+            <p class="text-base-content text-sm font-medium pb-2">Full Name</p>
+            <%= f.text_field :full_name,
+              autofocus: true,
+              class: "flex w-full rounded-lg border border-base-300 bg-white p-[15px] text-base text-base-content placeholder-secondary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20",
+              placeholder: "Enter your full name" %>
+          </label>
+
+          <!-- Password -->
+          <label class="flex flex-col">
+            <p class="text-accent text-sm font-medium pb-2">Password</p>
+            <% if @minimum_password_length %>
+              <em class="text-xs text-secondary mb-1">(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+            <%= f.password_field :password,
+              autocomplete: "new-password",
+              class: "flex w-full rounded-lg border border-base-300 bg-white p-[15px] text-base text-accent placeholder-secondary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20",
+              placeholder: "Enter your password" %>
+          </label>
+
+          <!-- Password Confirmation -->
+          <label class="flex flex-col">
+            <p class="text-accent text-sm font-medium pb-2">Confirm Password</p>
+            <%= f.password_field :password_confirmation,
+              autocomplete: "new-password",
+              class: "flex w-full rounded-lg border border-base-300 bg-white p-[15px] text-base text-accent placeholder-secondary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20",
+              placeholder: "Re-enter your password" %>
+          </label>
+
+          <%= f.submit "Accept Invitation &amp; Join",
+            class: "flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 text-base font-semibold text-white hover:bg-[#2563EB] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 cursor-pointer" %>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
