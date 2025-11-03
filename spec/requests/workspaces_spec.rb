@@ -13,8 +13,8 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "Workspace", type: :request do
-  let(:user_without_workspace) { create(:user, workspace: nil, role: nil)}
-  let(:user_with_workspace) { create(:user, workspace: create(:workspace), role: :admin)}
+  let(:user_without_workspace) { create(:user, workspace: nil, role: nil) }
+  let(:user_with_workspace) { create(:user, workspace: create(:workspace), role: :admin) }
 
   context "when user has no workspace" do
     before { sign_in user_without_workspace }
