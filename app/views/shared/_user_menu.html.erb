@@ -5,8 +5,8 @@
   <div class="flex flex-col p-2">
     <!-- Menu Header -->
     <div class="px-2 py-2">
-      <p class="truncate text-sm font-bold text-gray-900">Catherine Pike</p>
-      <p class="truncate text-sm text-gray-500">catherine.pike@example.com</p>
+      <p class="truncate text-sm font-bold text-gray-900"><%= current_user.full_name %></p>
+      <p class="truncate text-sm text-gray-500"><%= current_user.email %></p>
     </div>
 
     <!-- Divider -->
