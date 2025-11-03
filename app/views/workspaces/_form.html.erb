@@ -11,17 +11,26 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name %>
-  </div>
+  <div class="space-y-6">
+    <!-- Workspace Name -->
+    <label class="flex flex-col">
+      <p class="text-base-content text-sm font-medium pb-2">Workspace Name</p>
+      <%= form.text_field :name,
+        autofocus: true,
+        class: "flex w-full rounded-lg border border-base-300 bg-white p-[15px] text-base text-base-content placeholder-secondary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20",
+        placeholder: "e.g. Acme Corporation" %>
+    </label>
 
-  <div>
-    <%= form.label :subdomain, style: "display: block" %>
-    <%= form.text_field :subdomain %>
-  </div>
+    <!-- Workspace subdomain -->
+    <label class="flex flex-col">
+      <p class="text-base-content text-sm font-medium pb-2">Subdomain</p>
+      <%= form.text_field :subdomain,
+        class: "flex w-full rounded-lg border border-base-300 bg-white p-[15px] text-base text-base-content placeholder-secondary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20",
+        placeholder: "e.g. acme" %>
+    </label>
 
-  <div>
-    <%= form.submit %>
+    <!-- Submit -->
+    <%= form.submit "Create Workspace",
+      class: "flex h-11 w-full items-center justify-center gap-2 rounded-lg bg-primary px-4 text-base font-semibold text-white hover:bg-[#2563EB] focus:outline-none focus:ring-2 focus:ring-primary/50 focus:ring-offset-2 cursor-pointer" %>
   </div>
 <% end %>
