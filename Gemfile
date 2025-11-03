@@ -66,6 +66,8 @@ group :development, :test do
 end
 gem "devise", "~> 4.9"
 
+gem "devise_invitable", "~> 2.0.0"
+
 gem "pundit", "~> 2.5"
 
 gem "acts_as_tenant"
