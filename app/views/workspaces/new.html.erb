@@ -1,8 +1,21 @@
-<% content_for :title, "New workspace" %>
+<div class="relative flex h-auto min-h-screen w-full flex-col items-center justify-center bg-base-200 p-4 font-display">
+  <div class="w-full max-w-md space-y-8 bg-base-100 rounded-lg border border-base-300 shadow-sm p-8">
+    <!-- Header -->
+    <div class="flex flex-col items-center text-center">
+      <!-- Icon -->
+      <div class="mb-5 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-primary">
+        <span class="material-symbols-outlined text-4xl">groups</span>
+      </div>
+      <h1 class="text-base-content text-2xl font-bold leading-tight">Welcome to Helpwiki</h1>
+      <p class="text-secondary text-sm mt-2">
+        To get started, create a workspace for your team. You can invite your colleagues later.
+      </p>
+    </div>
 
-<h1>New workspace</h1>
-
-<%= render "form", workspace: @workspace %>
-
-<br>
+    <!-- Workspace Form -->
+    <div class="w-full">
+      <%= render "form", workspace: @workspace %>
+    </div>
+  </div>
+</div>
 
