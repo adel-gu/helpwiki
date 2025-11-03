@@ -1,4 +1,6 @@
 class WorkspacesController < ApplicationController
+  before_action :redirect_if_workspace_exists
+
   # GET /workspaces/new
   def new
     @workspace = Workspace.new
@@ -25,5 +27,11 @@ class WorkspacesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def workspace_params
       params.expect(workspace: [ :name, :subdomain ])
+    end
+
+    def redirect_if_workspace_exists
+      return unless current_user&.workspace.present?
+
+      redirect_to app_root_path(current_user.workspace.subdomain)
     end
 end

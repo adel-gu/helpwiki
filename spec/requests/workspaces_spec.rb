@@ -12,119 +12,50 @@ require 'rails_helper'
 # of tools you can use to make these specs even more expressive, but we're
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
-RSpec.describe "/workspaces", type: :request do
-  # This should return the minimal set of attributes required to create a valid
-  # Workspace. As you add validations to Workspace, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
-  }
+RSpec.describe "Workspace", type: :request do
+  let(:user_without_workspace) { create(:user, workspace: nil, role: nil)}
+  let(:user_with_workspace) { create(:user, workspace: create(:workspace), role: :admin)}
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
-  }
+  context "when user has no workspace" do
+    before { sign_in user_without_workspace }
 
-  describe "GET /index" do
-    it "renders a successful response" do
-      Workspace.create! valid_attributes
-      get workspaces_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /show" do
-    it "renders a successful response" do
-      workspace = Workspace.create! valid_attributes
-      get workspace_url(workspace)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /new" do
-    it "renders a successful response" do
-      get new_workspace_url
-      expect(response).to be_successful
-    end
-  end
-
-  describe "GET /edit" do
-    it "renders a successful response" do
-      workspace = Workspace.create! valid_attributes
-      get edit_workspace_url(workspace)
-      expect(response).to be_successful
-    end
-  end
-
-  describe "POST /create" do
-    context "with valid parameters" do
-      it "creates a new Workspace" do
-        expect {
-          post workspaces_url, params: { workspace: valid_attributes }
-        }.to change(Workspace, :count).by(1)
-      end
-
-      it "redirects to the created workspace" do
-        post workspaces_url, params: { workspace: valid_attributes }
-        expect(response).to redirect_to(workspace_url(Workspace.last))
+    describe "GET /workspace/new" do
+      it "renders the new workspace view" do
+        get new_workspace_path
+        expect(response).to have_http_status(:ok)
       end
     end
 
-    context "with invalid parameters" do
-      it "does not create a new Workspace" do
-        expect {
-          post workspaces_url, params: { workspace: invalid_attributes }
-        }.to change(Workspace, :count).by(0)
+    describe "POST /workspace" do
+      it "creates a new workspace and assign it to the user" do
+        post workspace_path, params: { workspace: { name: "Org", subdomain: "myorg" } }
+
+        workspace = Workspace.last
+        user_without_workspace.reload
+
+        expect(workspace).to be_present
+        expect(user_without_workspace.workspace).to eq(workspace)
+        expect(response).to redirect_to(app_root_path(workspace.subdomain))
       end
 
-      it "renders a response with 422 status (i.e. to display the 'new' template)" do
-        post workspaces_url, params: { workspace: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_content)
+      it "update user role to be admin" do
+        post workspace_path, params: { workspace: { name: "Org", subdomain: "myorg" } }
+
+        user_without_workspace.reload
+
+        expect(user_without_workspace.role).to eq("admin")
       end
     end
   end
 
-  describe "PATCH /update" do
-    context "with valid parameters" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
-      }
+  context "when user has a workspace" do
+    before { sign_in user_with_workspace }
 
-      it "updates the requested workspace" do
-        workspace = Workspace.create! valid_attributes
-        patch workspace_url(workspace), params: { workspace: new_attributes }
-        workspace.reload
-        skip("Add assertions for updated state")
+    describe "GET /workspace/new" do
+      it "redirects to the app view" do
+        get new_workspace_path
+        expect(response).to redirect_to(app_root_path(user_with_workspace.workspace.subdomain))
       end
-
-      it "redirects to the workspace" do
-        workspace = Workspace.create! valid_attributes
-        patch workspace_url(workspace), params: { workspace: new_attributes }
-        workspace.reload
-        expect(response).to redirect_to(workspace_url(workspace))
-      end
-    end
-
-    context "with invalid parameters" do
-      it "renders a response with 422 status (i.e. to display the 'edit' template)" do
-        workspace = Workspace.create! valid_attributes
-        patch workspace_url(workspace), params: { workspace: invalid_attributes }
-        expect(response).to have_http_status(:unprocessable_content)
-      end
-    end
-  end
-
-  describe "DELETE /destroy" do
-    it "destroys the requested workspace" do
-      workspace = Workspace.create! valid_attributes
-      expect {
-        delete workspace_url(workspace)
-      }.to change(Workspace, :count).by(-1)
-    end
-
-    it "redirects to the workspaces list" do
-      workspace = Workspace.create! valid_attributes
-      delete workspace_url(workspace)
-      expect(response).to redirect_to(workspaces_url)
     end
   end
 end
