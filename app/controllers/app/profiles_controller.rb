@@ -11,6 +11,19 @@ class App::ProfilesController < App::BaseController
     end
   end
 
+  def security
+  end
+
+  def update_password
+    if @user.update_with_password(password_params)
+      # Sign in the user again after password change
+      bypass_sign_in(@user)
+      redirect_to security_app_profile_path, notice: "Your password has been updated successfully."
+    else
+      render :security, status: :unprocessable_entity
+    end
+  end
+
   private
 
   def set_user
@@ -19,5 +32,9 @@ class App::ProfilesController < App::BaseController
 
   def user_params
     params.expect(user: [:full_name])
+  end
+
+  def password_params
+    params.expect(user: [:current_password, :password, :password_confirmation])
   end
 end

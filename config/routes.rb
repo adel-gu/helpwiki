@@ -8,6 +8,13 @@ Rails.application.routes.draw do
       root "home#index"
 
       resources :users_management, except: %i[ show edit ]
+
+      resource :profile, only: %i[edit update] do
+        member do
+          get :security
+          patch :update_password
+        end
+      end
     end
   end
 
