@@ -1,4 +1,4 @@
-<aside class="flex h-full w-16 flex-col items-center gap-4 bg-neutral py-4">
+<aside class="flex h-screen w-16 flex-col items-center gap-4 bg-neutral py-4">
   <!-- Top sidebar icons -->
   <% sidebar_items = [
     { icon: "visibility", path: "" },
@@ -26,7 +26,7 @@
     <div
       tabindex="0"
       role="button"
-      class="flex size-10 items-center justify-center rounded-lg text-white/70 transition-colors hover:bg-white/10 hover:text-white hover:cursor-pointer focus:bg-white/10 focus:text-white"
+      class="flex size-10 items-center justify-center rounded-lg transition-colors hover:bg-white/10 hover:text-white hover:cursor-pointer focus:bg-white/10 focus:text-white <%= current_page?(edit_app_profile_path) ? 'text-white bg-primary rounded-lg' : 'text-white/70' %>"
     >
       <span class="material-symbols-outlined text-2xl">account_circle</span>
     </div>

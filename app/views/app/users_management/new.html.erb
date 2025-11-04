@@ -1,6 +1,6 @@
 <h1 class="text-xl font-semibold mb-4">Invite a New User</h1>
 
-<%= form_with model: @user, url: app_users_management_index_path(current_tenant.subdomain), local: true do |f| %>
+<%= form_with model: @user, url: app_users_management_index_path, local: true do |f| %>
   <div class="mb-4">
     <%= f.label :email, "User Email", class: "block text-sm font-medium mb-1" %>
     <%= f.email_field :email, required: true, class: "input input-bordered w-full" %>
