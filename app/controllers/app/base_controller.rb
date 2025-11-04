@@ -3,6 +3,7 @@ class App::BaseController < ApplicationController
   set_current_tenant_through_filter
 
   before_action :authenticate_user!, :set_tenant, :ensure_user_in_workspace!
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   layout "app"
 
@@ -43,5 +44,10 @@ class App::BaseController < ApplicationController
 
     def default_url_options
       current_tenant ? { subdomain: current_tenant.subdomain } : {}
+    end
+
+    def user_not_authorized
+      flash[:alert] = "You are not authorized to perform this action."
+      redirect_back_or_to(app_root_path)
     end
 end
