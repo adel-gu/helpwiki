@@ -4,7 +4,7 @@
   <h1 class="text-4xl font-black text-text-dark tracking-[-0.033em]">User Management</h1>
 
   <%= link_to new_app_users_management_path,
-    class: "flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold tracking-[0.015em]" do %>
+    class: "flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold tracking-[0.015em] #{'hidden' unless current_user.admin?}" do %>
     <span class="truncate">+ Invite User</span>
   <% end %>
 </div>
@@ -48,7 +48,8 @@
               <%= f.select :role,
                 options_for_select(User.roles.keys.map { |r| [r.titleize, r] }, user.role),
                 {},
-                class: "select w-36 rounded-md text-sm text-base-content",
+                disabled: !current_user.admin?,
+                class: "select w-36 rounded-md text-sm text-base-content disabled:opacity-50",
                 onchange: "this.form.submit();"
                 %>
             <% end %>
@@ -63,8 +64,9 @@
           <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
             <div class="dropdown dropdown-left dropdown-center">
               <button type="button"
-                      class="btn btn-ghost btn-xs text-secondary hover:text-base-content"
-                      tabindex="0">
+                      class="btn btn-ghost btn-xs text-secondary hover:text-base-content disabled:opacity-50"
+                      tabindex="0"
+                      <%= 'disabled' unless current_user.admin? %>>
                 <span class="material-symbols-outlined">more_horiz</span>
               </button>
 
