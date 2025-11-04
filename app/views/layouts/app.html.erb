@@ -9,6 +9,22 @@
 
       <%= render "shared/sidebar" %>
 
+      <% if !flash.empty? %>
+        <div class="toast toast-top toast-end">
+          <% if flash[:notice].present? %>
+            <div class="alert alert-success">
+              <span><%= flash[:notice] %></span>
+            </div>
+          <% end %>
+
+          <% if flash[:alert].present? %>
+            <div class="alert alert-error">
+              <span><%= flash[:alert] %></span>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
       <main class="flex-1 overflow-y-auto p-8">
         <%= yield %>
       </main>
