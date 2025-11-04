@@ -1,0 +1,48 @@
+<div class="flex-1 flex">
+  <%# Column 3 (Main Content) %>
+  <%= render 'profile_nav' %>
+
+  <div class="flex-1 bg-white p-10">
+    <div class="max-w-2xl mx-auto">
+      <h1 class="text-3xl font-bold text-base-content mb-6">Edit Password</h1>
+      <!-- Form -->
+      <%= form_with model: @user, url: update_password_app_profile_path do |f| %>
+        <div class="space-y-6">
+          <!-- Current password -->
+          <label class="flex flex-col">
+            <p class="text-base-content text-sm font-medium pb-2">Current Password</p>
+            <%= f.password_field :current_password,
+              autofocus: true,
+              class: "flex w-full rounded-lg border border-base-300 bg-white p-[15px] text-base text-base-content placeholder-secondary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20",
+              placeholder: "Enter your current password" %>
+          </label>
+
+          <!-- New password -->
+          <label class="flex flex-col">
+            <p class="text-accent text-sm font-medium pb-2">New Password</p>
+            <% if @minimum_password_length %>
+              <em class="text-xs text-secondary mb-1">(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %>
+            <%= f.password_field :password,
+              class: "flex w-full rounded-lg border border-base-300 bg-white p-[15px] text-base text-accent placeholder-secondary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20",
+              placeholder: "Enter your new password" %>
+          </label>
+
+          <!-- New password -->
+          <label class="flex flex-col">
+            <p class="text-accent text-sm font-medium pb-2">Confirm Password</p>
+            <%= f.password_field :password_confirmation,
+              class: "flex w-full rounded-lg border border-base-300 bg-white p-[15px] text-base text-accent placeholder-secondary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20",
+              placeholder: "Re-enter your new password" %>
+          </label>
+
+          <div class="w-fit ml-auto">
+            <%= f.submit "Save changes",
+              class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+

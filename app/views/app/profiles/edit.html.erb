@@ -13,43 +13,44 @@
               alt: "Avatar for #{@user.full_name}",
               class: "size-24 rounded-full") %>
         </div>
-      <div>
-
-      <button class="btn btn-outline btn-secondary">
-        Upload new picture
-      </button>
-      <p class="text-xs text-gray-500 mt-2">At least 256x256px. JPG, PNG, or GIF.</p>
-    </div>
-  </div>
-
-  <!-- Form -->
-  <%= form_with model: @user, url: app_profile_path do |f| %>
-    <div class="space-y-6">
-      <!-- Name -->
-      <label class="flex flex-col">
-        <p class="text-base-content text-sm font-medium pb-2">Full Name</p>
-        <%= f.text_field :full_name,
-          autofocus: true,
-          class: "flex w-full rounded-lg border border-base-300 bg-white p-[15px] text-base text-base-content placeholder-secondary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20",
-          placeholder: "Enter your full name" %>
-      </label>
-
-      <!-- Email -->
-      <label class="flex flex-col">
-        <p class="text-accent text-sm font-medium pb-2">Email Address</p>
-        <%= f.email_field :email,
-          disabled: true,
-          autocomplete: "email",
-          class: "flex w-full rounded-lg border border-base-300 bg-white p-[15px] text-base text-accent placeholder-secondary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20",
-          placeholder: "you@company.com" %>
-      </label>
-
-      <div class="w-fit ml-auto">
-        <%= f.submit "Save changes",
-          class: "btn btn-primary" %>
+        <div>
+          <button class="btn btn-outline btn-secondary">
+            Upload new picture
+          </button>
+          <p class="text-xs text-gray-500 mt-2">At least 256x256px. JPG, PNG, or GIF.</p>
+        </div>
       </div>
+
+
+      <!-- Form -->
+      <%= form_with model: @user, url: app_profile_path do |f| %>
+        <div class="space-y-6">
+          <!-- Name -->
+          <label class="flex flex-col">
+            <p class="text-base-content text-sm font-medium pb-2">Full Name</p>
+            <%= f.text_field :full_name,
+              autofocus: true,
+              class: "flex w-full rounded-lg border border-base-300 bg-white p-[15px] text-base text-base-content placeholder-secondary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20",
+              placeholder: "Enter your full name" %>
+          </label>
+
+          <!-- Email -->
+          <label class="flex flex-col">
+            <p class="text-accent text-sm font-medium pb-2">Email Address</p>
+            <%= f.email_field :email,
+              disabled: true,
+              autocomplete: "email",
+              class: "flex w-full rounded-lg border border-base-300 bg-white p-[15px] text-base text-accent placeholder-secondary focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20",
+              placeholder: "you@company.com" %>
+          </label>
+
+          <div class="w-fit ml-auto">
+            <%= f.submit "Save changes",
+              class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
     </div>
-  <% end %>
   </div>
 </div>
 
