@@ -16,6 +16,15 @@ RSpec.describe "Base", type: :request do
         expect(response).to redirect_to(new_workspace_path)
       end
     end
+
+    # Get the URL without registered subdomain
+    describe "GET /app" do
+      it "should redirect user to create a new workspace" do
+        get "/gamma/app"
+
+        expect(response).to redirect_to(new_workspace_path)
+      end
+    end
   end
 
   context "when user belong to a workspace" do
@@ -31,6 +40,17 @@ RSpec.describe "Base", type: :request do
       it "allows access" do
         get app_root_path(workspace.subdomain)
         expect(response).to have_http_status(:ok)
+      end
+    end
+
+    # Get the URL without registered subdomain
+    describe "GET /app" do
+      it "should redirect user to its belonging workspace" do
+        get "/gamma/app"
+
+        expect(response).to redirect_to(new_workspace_path)
+        follow_redirect!
+        expect(response).to redirect_to(app_root_path(user_with_workspace.workspace.subdomain))
       end
     end
   end
