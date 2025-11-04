@@ -16,7 +16,7 @@ class App::UsersManagementController < App::BaseController
     )
 
     if @user.errors.empty?
-      redirect_to app_users_management_index_path(current_tenant.subdomain), notice: "Invitation sent to #{@user.email}."
+      redirect_to app_users_management_index_path, notice: "Invitation sent to #{@user.email}."
     else
       flash[:alert] = @user.errors.full_messages.to_sentence
       render :new, status: :unprocessable_entity
