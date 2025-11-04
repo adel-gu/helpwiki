@@ -1,0 +1,14 @@
+<div class="w-64 bg-base-200 border-r border-gray-200 p-6 h-screen">
+  <% nav_items = [
+    { title: "Edit Profile", path: edit_app_profile_path },
+    { title: "Security", path: app_root_path },
+    { title: "Notifications", path: app_root_path }
+  ] %>
+
+  <div class="flex flex-col space-y-2">
+    <% nav_items.each do |item| %>
+      <% active = current_page?(item[:path]) %>
+      <%= link_to item[:title], item[:path], class: "px-4 py-2 rounded-lg text-sm font-medium #{active ? 'text-primary bg-primary/10' : 'text-base-content hover:bg-gray-200'}" %>
+    <% end %>
+  </div>
+</div>
