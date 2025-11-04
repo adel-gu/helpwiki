@@ -1,27 +1,26 @@
 require 'rails_helper'
 
 RSpec.describe UsersManagementPolicy, type: :policy do
-  let(:user) { User.new }
-
   subject { described_class }
 
-  permissions ".scope" do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  let(:workspace) { build(:workspace) }
 
-  permissions :show? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  let(:admin)  { build(:user, role: :admin, workspace: workspace) }
+  let(:reader) { build(:user, role: :reader, workspace: workspace) }
 
-  permissions :create? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  let(:record) { build(:user, workspace: workspace) }
 
-  permissions :update? do
-    pending "add some examples to (or delete) #{__FILE__}"
-  end
+  permissions :new?, :create?, :update?, :destroy? do
+    context "when user is an admin" do
+      it "grants access" do
+        expect(subject).to permit(admin, record)
+      end
+    end
 
-  permissions :destroy? do
-    pending "add some examples to (or delete) #{__FILE__}"
+    context "when user is not an admin" do
+      it "denies access" do
+        expect(subject).not_to permit(reader, record)
+      end
+    end
   end
 end
