@@ -7,13 +7,17 @@ class App::UsersManagementController < App::BaseController
 
   def new
     @user = User.new
+    authorize @user, policy_class: UsersManagementPolicy
   end
 
   def create
+    @user = User.new(email: user_params[:email], role: user_params[:role])
+    authorize @user, policy_class: UsersManagementPolicy
+
     @user = User.invite!(
       { email: user_params[:email], role: user_params[:role], workspace: current_tenant },
       current_user # inviter
-    )
+      )
 
     if @user.errors.empty?
       redirect_to app_users_management_index_path, notice: "Invitation sent to #{@user.email}."
@@ -25,6 +29,7 @@ class App::UsersManagementController < App::BaseController
 
   # PATCH /app/users_management/:id
   def update
+    authorize @user, policy_class: UsersManagementPolicy
     if @user.update(user_params)
       redirect_to app_users_management_index_path, notice: "User role updated successfully."
     else
@@ -34,6 +39,7 @@ class App::UsersManagementController < App::BaseController
 
   # DELETE /app/users_management/:id
   def destroy
+    authorize @user, policy_class: UsersManagementPolicy
     if @user.destroy
       redirect_to app_users_management_index_path, notice: "User removed successfully."
     else
