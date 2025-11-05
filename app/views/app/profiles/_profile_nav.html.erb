@@ -1,14 +1,19 @@
 <div class="w-64 bg-base-200 border-r border-gray-200 p-6 h-screen">
+  <p class="text-secondary text-base font-medium leading-normal pr-3 pt-2 mb-4">Profile Settings</p>
+
   <% nav_items = [
-    { title: "Edit Profile", path: edit_app_profile_path },
-    { title: "Security", path: security_app_profile_path },
-    { title: "Notifications", path: app_root_path }
+    { icon: "edit", title: "Edit Profile", path: edit_app_profile_path },
+    { icon: "shield", title: "Security", path: security_app_profile_path },
+    { icon: "notifications", title: "Notifications", path: notifications_app_profile_path }
   ] %>
 
   <div class="flex flex-col space-y-2">
     <% nav_items.each do |item| %>
       <% active = current_page?(item[:path]) %>
-      <%= link_to item[:title], item[:path], class: "px-4 py-2 rounded-lg text-sm font-medium #{active ? 'text-primary bg-primary/10' : 'text-base-content hover:bg-gray-200'}" %>
+      <%= link_to item[:path], class: "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium #{active ? 'text-primary bg-primary/10' : 'text-base-content hover:bg-gray-200'}" do %>
+        <span class="material-symbols-outlined" style="font-size: 18px;"><%= item[:icon] %></span>
+        <p class="text-sm font-medium leading-normal"><%= item[:title] %></p>
+      <% end %>
     <% end %>
   </div>
 </div>

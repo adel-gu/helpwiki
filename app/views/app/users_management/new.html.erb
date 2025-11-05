@@ -1,21 +1,23 @@
-<h1 class="text-xl font-semibold mb-4">Invite a New User</h1>
+<section class="p-8">
+  <h1 class="text-xl font-semibold mb-4">Invite a New User</h1>
 
-<%= form_with model: @user, url: app_users_management_index_path, local: true do |f| %>
-  <div class="mb-4">
-    <%= f.label :email, "User Email", class: "block text-sm font-medium mb-1" %>
-    <%= f.email_field :email, required: true, class: "input input-bordered w-full" %>
-  </div>
+  <%= form_with model: @user, url: app_users_management_index_path, local: true do |f| %>
+    <div class="mb-4">
+      <%= f.label :email, "User Email", class: "block text-sm font-medium mb-1" %>
+      <%= f.email_field :email, required: true, class: "input input-bordered w-full" %>
+    </div>
 
-  <div class="mb-4">
-    <%= f.label :role, "Assign Role", class: "block text-sm font-medium mb-1" %>
-    <%= f.select :role,
-          User.roles.keys.map { |r| [r.humanize, r] },
-          { include_blank: "Select a role" },
-          required: true,
-          class: "select select-bordered w-full" %>
-  </div>
+    <div class="mb-4">
+      <%= f.label :role, "Assign Role", class: "block text-sm font-medium mb-1" %>
+      <%= f.select :role,
+            User.roles.keys.map { |r| [r.humanize, r] },
+            { include_blank: "Select a role" },
+            required: true,
+            class: "select select-bordered w-full" %>
+    </div>
 
-  <div class="mt-4">
-    <%= f.submit "Send Invitation", class: "btn btn-primary" %>
-  </div>
-<% end %>
+    <div class="mt-4">
+      <%= f.submit "Send Invitation", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</section>

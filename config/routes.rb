@@ -13,6 +13,7 @@ Rails.application.routes.draw do
         member do
           get :security
           patch :update_password
+          get :notifications
         end
       end
     end

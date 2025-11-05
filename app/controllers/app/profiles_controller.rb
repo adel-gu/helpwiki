@@ -11,8 +11,7 @@ class App::ProfilesController < App::BaseController
     end
   end
 
-  def security
-  end
+  def security; end
 
   def update_password
     if @user.update_with_password(password_params)
@@ -23,6 +22,8 @@ class App::ProfilesController < App::BaseController
       render :security, status: :unprocessable_entity
     end
   end
+
+  def notifications; end
 
   private
 
