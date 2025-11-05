@@ -1,1 +1,55 @@
-notify me
+<div class="flex-1 flex">
+  <%# Column 3 (Main Content) %>
+  <%= render 'profile_nav' %>
+
+  <div class="flex-1 p-10">
+    <div class="max-w-2xl mx-auto">
+      <h1 class="text-3xl font-bold text-base-content mb-6">Notifications Settings</h1>
+
+      <!-- Notifications list -->
+      <div class="flex flex-col divide-y divide-base-300 grow">
+        <% notifications = [
+          { icon: "assignment_ind", title: "When an article is assigned to me", description: "Receive a notification when a new article is assigned to you for review.", enabled: true },
+          { icon: "group", title: "When someone requests my review", description: "Get notified when another user requests your feedback on an article.", enabled: true },
+          { icon: "chat_bubble", title: "When someone comments on my article", description: "Be alerted when someone leaves a comment on an article you've written.", enabled: false },
+          { icon: "bookmark", title: "When an article I'm following is updated", description: "Get notified about updates to articles you've bookmarked.", enabled: true },
+          { icon: "calendar_month", title: "Weekly activity summary", description: "Receive a weekly email summarizing your knowledge base activity.", enabled: false }
+        ] %>
+
+        <% notifications.each do |notification| %>
+          <div class="flex items-center gap-4 py-4 justify-between">
+            <div class="flex items-center gap-4">
+              <div class="flex items-center justify-center rounded-lg bg-gray-100 dark:bg-background-light/10 shrink-0 size-12">
+                <span class="material-symbols-outlined font-normal!"><%= notification[:icon] %></span>
+              </div>
+              <div class="flex flex-col justify-center">
+                <p class="text-base font-medium leading-normal line-clamp-1">
+                  <%= notification[:title] %>
+                </p>
+                <p class="text-secondary text-sm font-normal leading-normal line-clamp-2">
+                  <%= notification[:description] %>
+                </p>
+              </div>
+            </div>
+
+            <div class="shrink-0">
+              <label class="relative flex h-[31px] w-[51px] cursor-pointer items-center rounded-full border-none bg-base-300 p-0.5 has-checked:justify-end has-checked:bg-primary">
+                <div class="h-full w-[27px] rounded-full bg-white shadow-sm"></div>
+
+                <%= check_box_tag "notifications[#{notification[:title].parameterize}]", "1", notification[:enabled],
+                  class: "invisible absolute" %>
+              </label>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Footer -->
+      <div class="mt-auto pt-8 flex justify-end">
+        <%= button_tag "Save Changes",
+          class: "bg-primary text-white font-medium py-2 px-4 rounded-lg disabled:bg-primary/50 disabled:cursor-not-allowed" %>
+      </div>
+    </div>
+  </div>
+</div>
+
