@@ -32,10 +32,10 @@ class App::ProfilesController < App::BaseController
   end
 
   def user_params
-    params.expect(user: [:full_name])
+    params.expect(user: [ :full_name ])
   end
 
   def password_params
-    params.expect(user: [:current_password, :password, :password_confirmation])
+    params.expect(user: [ :current_password, :password, :password_confirmation ])
   end
 end
