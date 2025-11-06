@@ -2,9 +2,9 @@ class ActivityLog < ApplicationRecord
   acts_as_tenant :workspace
 
   belongs_to :article
-  belongs_to :actor, class_name: 'User'
+  belongs_to :actor, class_name: "User"
 
-   # This list can be expanded as new actions are needed.
+  # This list can be expanded as new actions are needed.
   enum action: {
     # Article Lifecycle
     created_article: 0,
