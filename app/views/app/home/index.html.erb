@@ -1,1 +1,6 @@
 <h1>Home</h1>
+<%= link_to app_articles_path,
+    data: { turbo_method: :post },
+    class: "flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold tracking-[0.015em]" do %>
+    <span class="truncate">+ Create Article</span>
+<% end %>
