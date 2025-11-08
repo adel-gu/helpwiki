@@ -9,9 +9,9 @@ class User < ApplicationRecord
   acts_as_tenant :workspace, optional: true
 
   # Articles this user created, is writing, or is reviewing
-  has_many :created_articles, class_name: "Article", foreing_key: :creator_id, dependent: :nullify
-  has_many :written_articles, class_name: "Article", foreing_key: :writer_id, dependent: :nullify
-  has_many :reviewed_articles, class_name: "Article", foreing_key: :reviewer_id, dependent: :nullify
+  has_many :created_articles, class_name: "Article", foreign_key: :creator_id, dependent: :nullify
+  has_many :written_articles, class_name: "Article", foreign_key: :writer_id, dependent: :nullify
+  has_many :reviewed_articles, class_name: "Article", foreign_key: :reviewer_id, dependent: :nullify
 
   # Category
   has_many :created_categories, class_name: "Category", foreign_key: :creator_id ,dependent: :nullify
