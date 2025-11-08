@@ -17,7 +17,7 @@ class User < ApplicationRecord
   has_many :created_categories, class_name: "Category", foreign_key: :creator_id ,dependent: :nullify
 
   # Article version
-  has_many :article_versions, class_name: "Article_versions", foreign_key: :author_id, dependent: :nullify
+  has_many :article_versions, class_name: "ArticleVersion", foreign_key: :author_id, dependent: :nullify
 
   # Activity log
   has_many :activity_logs, class_name: "ActivityLogs", foreign_key: :actor_id, dependent: :nullify

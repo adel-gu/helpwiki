@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_11_06_161437) do
+ActiveRecord::Schema[8.0].define(version: 2025_11_08_162439) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,8 +20,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_06_161437) do
     t.integer "action"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "workspace_id", null: false
     t.index ["actor_id"], name: "index_activity_logs_on_actor_id"
     t.index ["article_id"], name: "index_activity_logs_on_article_id"
+    t.index ["workspace_id"], name: "index_activity_logs_on_workspace_id"
   end
 
   create_table "article_versions", force: :cascade do |t|
@@ -105,6 +107,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_11_06_161437) do
 
   add_foreign_key "activity_logs", "articles"
   add_foreign_key "activity_logs", "users", column: "actor_id"
+  add_foreign_key "activity_logs", "workspaces"
   add_foreign_key "article_versions", "articles"
   add_foreign_key "article_versions", "users", column: "author_id"
   add_foreign_key "articles", "categories"

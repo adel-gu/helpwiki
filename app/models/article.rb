@@ -3,7 +3,7 @@ class Article < ApplicationRecord
 
   belongs_to :category, optional: true
 
-  belongs_to :creator, class_name: "User", optional: true
+  belongs_to :creator, class_name: "User"
   belongs_to :writer, class_name: "User", optional: true
   belongs_to :reviewer, class_name: "User", optional: true
 
