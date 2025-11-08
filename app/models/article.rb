@@ -1,7 +1,9 @@
 class Article < ApplicationRecord
   acts_as_tenant :workspace
+
   belongs_to :category, optional: true
 
+  belongs_to :creator, class_name: "User", optional: true
   belongs_to :writer, class_name: "User", optional: true
   belongs_to :reviewer, class_name: "User", optional: true
 
