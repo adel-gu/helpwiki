@@ -1,0 +1,15 @@
+<% content_for :title, "Editing article" %>
+
+<div class="p-8">
+  <h1 class="text-2xl font-bold mb-4">
+    Editing: <%= @article&.task_title %>
+  </h1>
+
+  <div class="p-4 border rounded-md bg-gray-50">
+    <p><strong>ID:</strong> <%= @article.id %></p>
+    <p><strong>Status:</strong> <span class="font-mono bg-gray-200 text-gray-700 px-2 py-1 rounded"><%= @article.status %></span></p>
+    <p><strong>creator:</strong> <%= @article.creator.full_name %></p>
+  </div>
+
+  <!-- The full ActionText editor form will be implemented in a future ticket. -->
+</div>
