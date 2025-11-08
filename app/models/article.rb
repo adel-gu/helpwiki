@@ -12,6 +12,6 @@ class Article < ApplicationRecord
 
   has_rich_text :content
 
-  enum status: { backlog: 0, draft: 1, in_review: 2, published: 3, archived: 4 }
-  enum priority: { low: 0, medium: 1, high: 2 }
+  enum :status, { todo: 0, draft: 1, in_review: 2, published: 3, archived: 4 }
+  enum :priority, { low: 0, medium: 1, high: 2 }
 end
