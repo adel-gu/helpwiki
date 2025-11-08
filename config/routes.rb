@@ -16,6 +16,8 @@ Rails.application.routes.draw do
           get :notifications
         end
       end
+
+      resources :articles, only: [:create, :edit]
     end
   end
 
