@@ -15,7 +15,7 @@ RSpec.describe "App::Profiles", type: :request do
 
     it "update user profile info" do
       patch app_profile_path(workspace.subdomain),
-        :params => { :user => { :full_name => "new user" }}
+        params: { user: { full_name: "new user" } }
 
       expect(response).to redirect_to(edit_app_profile_path(workspace.subdomain))
       follow_redirect!
@@ -26,7 +26,7 @@ RSpec.describe "App::Profiles", type: :request do
 
     it "doesn't update when full_name is blank" do
       patch app_profile_path(workspace.subdomain),
-        :params => { :user => { :full_name => "" }}
+        params: { user: { full_name: "" } }
 
       expect(response).to have_http_status(:unprocessable_content)
       expect(response.body).to include("h")
@@ -45,7 +45,7 @@ RSpec.describe "App::Profiles", type: :request do
     context "with valid params" do
       it "should update user security info" do
         patch password_update_path,
-          params: { user: {current_password: "old_password", password: "password123", password_confirmation: "password123" }}
+          params: { user: { current_password: "old_password", password: "password123", password_confirmation: "password123" } }
 
         expect(response).to redirect_to(security_app_profile_path(workspace.subdomain))
         follow_redirect!
@@ -61,7 +61,7 @@ RSpec.describe "App::Profiles", type: :request do
     context "with invalid params" do
       it "should not update user security info" do
         patch password_update_path,
-          params: { user: {current_password: "new_password", password: "password123", password_confirmation: "password123" }}
+          params: { user: { current_password: "new_password", password: "password123", password_confirmation: "password123" } }
 
         expect(response).to have_http_status(:unprocessable_content)
         expect(response).to render_template(:security)

@@ -14,7 +14,7 @@ class User < ApplicationRecord
   has_many :reviewed_articles, class_name: "Article", foreign_key: :reviewer_id, dependent: :nullify
 
   # Category
-  has_many :created_categories, class_name: "Category", foreign_key: :creator_id ,dependent: :nullify
+  has_many :created_categories, class_name: "Category", foreign_key: :creator_id, dependent: :nullify
 
   # Article version
   has_many :article_versions, class_name: "ArticleVersion", foreign_key: :author_id, dependent: :nullify
