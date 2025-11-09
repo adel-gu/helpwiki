@@ -25,11 +25,11 @@ class User < ApplicationRecord
   # -- Validation --
   enum :role, { reader: 1, collaborator: 2, editor: 3, admin: 4 }
 
-  validates :full_name, presence: true, length: { maximum: 100 }, unless: :invitation_created?
+  validates :full_name, presence: true, length: { maximum: 100 }, unless: :invited_without_name?
 
   private
 
-  def invitation_created?
-    invitation_token.present?
+  def invited_without_name?
+    new_record? && invitation_token.present?
   end
 end
