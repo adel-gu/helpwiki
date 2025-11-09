@@ -17,7 +17,7 @@ Rails.application.routes.draw do
         end
       end
 
-      resources :articles, only: [:create, :edit]
+      resources :articles, only: [ :create, :edit ]
     end
   end
 

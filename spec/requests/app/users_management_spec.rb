@@ -35,7 +35,7 @@ RSpec.describe "App::UsersManagements", type: :request do
       it "should sent an invitation" do
         expect {
           post app_users_management_index_path(workspace.subdomain),
-            params: { user: { email: "example@gmail.com", role: :editor }}
+            params: { user: { email: "example@gmail.com", role: :editor } }
         }.to change(User, :count).by(1)
 
         new_user = User.find_by(email: "example@gmail.com")
@@ -51,7 +51,7 @@ RSpec.describe "App::UsersManagements", type: :request do
 
       it "should not sent an invitation" do
         post app_users_management_index_path(workspace.subdomain),
-          params: { user: { email: "", role: :editor }}
+          params: { user: { email: "", role: :editor } }
 
         expect(response).to have_http_status(:unprocessable_content)
         expect(response).to render_template(:new)
@@ -61,7 +61,7 @@ RSpec.describe "App::UsersManagements", type: :request do
 
       it "should update reader role" do
         patch app_users_management_path(workspace.subdomain, reader),
-          params: { user: { role: "collaborator" }}
+          params: { user: { role: "collaborator" } }
 
         expect(response).to redirect_to(app_users_management_index_path(workspace.subdomain))
         follow_redirect!
@@ -97,7 +97,7 @@ RSpec.describe "App::UsersManagements", type: :request do
 
       it "should not sent an invitation" do
         post app_users_management_index_path(workspace.subdomain),
-          params: { user: { email: "example@gmail.com", role: :editor }}
+          params: { user: { email: "example@gmail.com", role: :editor } }
 
         expect(response).to redirect_to(app_root_path(workspace.subdomain))
         follow_redirect!
@@ -106,7 +106,7 @@ RSpec.describe "App::UsersManagements", type: :request do
 
       it "should not update reader role" do
         patch app_users_management_path(workspace.subdomain, reader),
-          params: { user: { role: "collaborator" }}
+          params: { user: { role: "collaborator" } }
 
         expect(response).to redirect_to(app_root_path(workspace.subdomain))
         follow_redirect!
