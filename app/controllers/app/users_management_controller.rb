@@ -23,7 +23,7 @@ class App::UsersManagementController < App::BaseController
       redirect_to app_users_management_index_path, notice: "Invitation sent to #{@user.email}."
     else
       flash[:alert] = @user.errors.full_messages.to_sentence
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 

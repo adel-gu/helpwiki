@@ -20,7 +20,7 @@ class User < ApplicationRecord
   has_many :article_versions, class_name: "ArticleVersion", foreign_key: :author_id, dependent: :nullify
 
   # Activity log
-  has_many :activity_logs, class_name: "ActivityLogs", foreign_key: :actor_id, dependent: :nullify
+  has_many :activity_logs, class_name: "ActivityLog", foreign_key: :actor_id, dependent: :nullify
 
   # -- Validation --
   enum :role, { reader: 1, collaborator: 2, editor: 3, admin: 4 }
