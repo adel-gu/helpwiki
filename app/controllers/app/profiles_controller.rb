@@ -7,7 +7,7 @@ class App::ProfilesController < App::BaseController
     if @user.update(user_params)
       redirect_to edit_app_profile_path, notice: "Your profile has been updated."
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
@@ -19,7 +19,7 @@ class App::ProfilesController < App::BaseController
       bypass_sign_in(@user)
       redirect_to security_app_profile_path, notice: "Your password has been updated successfully."
     else
-      render :security, status: :unprocessable_entity
+      render :security, status: :unprocessable_content
     end
   end
 

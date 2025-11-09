@@ -51,6 +51,13 @@ group :development, :test do
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
+
+  gem "rspec-rails", "~> 8.0.0"
+  gem "factory_bot_rails"
+  gem "faker"
+  gem "shoulda-matchers", "~> 6.0"
+
+  gem 'rails-controller-testing'
 end
 
 group :development do
@@ -58,12 +65,6 @@ group :development do
   gem "web-console"
 end
 
-group :development, :test do
-  gem "rspec-rails", "~> 8.0.0"
-  gem "factory_bot_rails"
-  gem "faker"
-  gem "shoulda-matchers", "~> 6.0"
-end
 gem "devise", "~> 4.9"
 
 gem "devise_invitable", "~> 2.0.0"
