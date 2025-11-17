@@ -1,5 +1,5 @@
 class App::ArticlesController < App::BaseController
-  before_action :set_app_article, only: %i[ edit ]
+  before_action :set_article, only: %i[ edit update ]
 
   # POST /app/articles
   def create
@@ -17,11 +17,26 @@ class App::ArticlesController < App::BaseController
   end
 
   def update
+    if @article.update(article_params)
+      respond_to do |format|
+        format.html { redirect_to edit_app_article(@article) }
+        format.json { head :ok }
+      end
+    else
+      respond_to do |format|
+        format.html { render :edit, status: :unprocessable_content }
+        format.json { render json: @article.errors, status: :unprocessable_content }
+      end
+    end
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_app_article
+    def set_article
       @article = Article.find(params.expect(:id))
+    end
+
+    def article_params
+      params.expect(article: [ :content ])
     end
 end
