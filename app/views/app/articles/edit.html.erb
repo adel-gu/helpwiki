@@ -7,5 +7,9 @@
     autosave_article_url_value: app_article_path(@article)
   } do |form| %>
     <%= form.rich_textarea :content, data: { action: "trix-change->autosave-article#save"} %>
+
+    <div class="save-status text-sm text-gray-500" data-autosave-article-target="status">
+      <!-- Status will be updated by Stimulus -->
+    </div>
   <% end %>
 </div>
