@@ -3,6 +3,7 @@ import debounce from 'lodash.debounce'
 
 // Connects to data-controller="autosave-article"
 export default class extends Controller {
+  static targets = ['status']
   static values = {
     url: String
   }
@@ -15,6 +16,8 @@ export default class extends Controller {
     const formData = new FormData(this.element)
 
     try {
+      this.statusTarget.textContent = 'Saving...'
+
       const response = await fetch(this.urlValue, {
         method: 'PATCH',
         headers: {
@@ -26,15 +29,19 @@ export default class extends Controller {
       })
 
       if (response.ok) {
-        // AC [3]: Success
-        console.log('Send success')
+        this.statusTarget.textContent = '✓ Saved'
+        this.statusTarget.classList.add('text-green-600')
       } else {
         // AC [3]: Failure
         const errorData = await response.json()
         console.error('Save failed:', errorData)
+        this.statusTarget.textContent = 'Error saving.'
+        this.statusTarget.classList.add('text-red-600')
       }
     } catch (error) {
       console.error('An unexpected error occurred:', error)
+      this.statusTarget.textContent = 'Network error.'
+      this.statusTarget.classList.add('text-red-600')
     }
   }
 
