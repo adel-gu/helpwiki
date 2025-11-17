@@ -16,6 +16,9 @@ class App::ArticlesController < App::BaseController
   def edit
   end
 
+  def update
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_app_article
