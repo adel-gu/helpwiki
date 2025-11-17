@@ -2,7 +2,10 @@
 
 <div class="p-8">
   <!-- ActionText editor form. -->
-  <%= form_with model: @article, url: app_article_path do |form| %>
-    <%= form.rich_textarea :content %>
+  <%= form_with model: @article, url: app_article_path, data: {
+    controller: "autosave-article",
+    autosave_article_url_value: app_article_path(@article)
+  } do |form| %>
+    <%= form.rich_textarea :content, data: { action: "trix-change->autosave-article#save"} %>
   <% end %>
 </div>
