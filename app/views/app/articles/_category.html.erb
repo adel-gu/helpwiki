@@ -1,0 +1,23 @@
+<div class="col-span-2 card bg-base-100 w-56 h-fit shadow-md ml-auto mr-4">
+  <div class="card-body">
+    <%= form_with model: article,
+                  url: app_article_path(article),
+                  method: :patch,
+                  class: "" do |form| %>
+
+      <div class="relative w-full flex">
+        <%= form.label :category_id, class: "card-title" %>
+        <%= form.select :category_id,
+                        Category.pluck(:name, :id),
+                        {},
+                        class: "select h-4 ml-auto cursor-pointer py-2 px-3 opacity-0",
+                        onchange: "this.form.requestSubmit();" %>
+
+        <div class="absolute inset-y-0 right-1 flex items-center pointer-events-none">
+          <span class="material-symbols-outlined text-lg">edit</span>
+        </div>
+      </div>
+    <% end %>
+    <p><%= article.category&.name || "Assign a category" %></p>
+  </div>
+</div>

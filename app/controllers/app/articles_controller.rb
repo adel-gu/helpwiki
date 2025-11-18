@@ -19,7 +19,7 @@ class App::ArticlesController < App::BaseController
   def update
     if @article.update(article_params)
       respond_to do |format|
-        format.html { redirect_to edit_app_article(@article) }
+        format.html { redirect_to edit_app_article_path(@article) }
         format.json { head :ok }
       end
     else
@@ -33,10 +33,10 @@ class App::ArticlesController < App::BaseController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
-      @article = Article.find(params.expect(:id))
+      @article = Article.find(params[:id])
     end
 
     def article_params
-      params.expect(article: [ :content ])
+      params.expect(article: [ :content, :category_id ])
     end
 end

@@ -1,15 +1,10 @@
 <% content_for :title, "Editor" %>
 
-<div class="p-8">
-  <!-- ActionText editor form. -->
-  <%= form_with model: @article, url: app_article_path, data: {
-    controller: "autosave-article",
-    autosave_article_url_value: app_article_path(@article)
-  } do |form| %>
-    <%= form.rich_textarea :content, data: { action: "trix-change->autosave-article#save"} %>
+<section class="p-8">
 
-    <div class="save-status text-sm text-gray-500" data-autosave-article-target="status">
-      <!-- Status will be updated by Stimulus -->
-    </div>
-  <% end %>
-</div>
+  <div class="grid grid-cols-12 border">
+    <%= render "category", article: @article %>
+    <%= render "editor", article: @article %>
+    <%= render "task" %>
+  </div>
+</section>
