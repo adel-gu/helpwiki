@@ -44,13 +44,13 @@
 
             <!-- Role -->
             <td class="px-6 py-4 whitespace-nowrap">
-              <%= form_with(model: user, url: app_users_management_path(current_tenant.subdomain, user), method: :patch, local: true) do |f| %>
+              <%= form_with(model: user, url: app_users_management_path(user), method: :patch) do |f| %>
                 <%= f.select :role,
                   options_for_select(User.roles.keys.map { |r| [r.titleize, r] }, user.role),
                   {},
                   disabled: !current_user.admin?,
                   class: "select w-36 rounded-md text-sm text-base-content disabled:opacity-50",
-                  onchange: "this.form.submit();"
+                  onchange: "this.form.requestSubmit();"
                   %>
               <% end %>
             </td>
