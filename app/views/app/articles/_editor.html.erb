@@ -1,0 +1,13 @@
+<div class="col-span-7 border-4">
+  <%= form_with model: article, url: app_article_path, data: {
+      controller: "autosave-article",
+      autosave_article_url_value: app_article_path(article)
+    }, class: "w-full" do |form| %>
+      <%= form.text_field :title, class: "border" %>
+      <%= form.rich_textarea :content, data: { action: "trix-change->autosave-article#save"} %>
+
+      <div class="save-status text-sm text-gray-500" data-autosave-article-target="status">
+        <!-- Status will be updated by Stimulus -->
+      </div>
+  <% end %>
+</div>
