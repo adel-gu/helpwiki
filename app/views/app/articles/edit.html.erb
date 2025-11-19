@@ -1,10 +1,9 @@
 <% content_for :title, "Editor" %>
 
-<section class="p-8">
+<section class="pl-8">
 
   <div class="grid grid-cols-12 border">
     <%= render "category", article: @article %>
     <%= render "editor", article: @article %>
-    <%= render "task" %>
   </div>
 </section>
