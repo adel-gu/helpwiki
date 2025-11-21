@@ -17,6 +17,8 @@
     "@rails/actiontext": "^8.1.100",
     "@tailwindcss/cli": "^4.1.16",
     "@tiptap/core": "^3.11.0",
+    "@tiptap/extension-subscript": "^3.11.0",
+    "@tiptap/extension-superscript": "^3.11.0",
     "@tiptap/pm": "^3.11.0",
     "@tiptap/starter-kit": "^3.11.0",
     "tailwindcss": "^4.1.16",
