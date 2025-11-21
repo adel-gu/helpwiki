@@ -2,13 +2,7 @@
 // Run that command whenever you add a new controller or create them with
 // ./bin/rails generate stimulus controllerName
 
-import { application } from "./application"
+import { application } from './application'
 
-import AutosaveArticleController from "./autosave_article_controller"
-application.register("autosave-article", AutosaveArticleController)
-
-import EditorController from "./editor_controller"
-application.register("editor", EditorController)
-
-import HelloController from "./hello_controller"
-application.register("hello", HelloController)
+import EditorController from './editor_controller'
+application.register('editor', EditorController)
