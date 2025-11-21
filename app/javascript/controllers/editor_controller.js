@@ -4,6 +4,7 @@ import StarterKit from '@tiptap/starter-kit'
 import Subscript from '@tiptap/extension-subscript'
 import Superscript from '@tiptap/extension-superscript'
 import { TaskList, TaskItem } from '@tiptap/extension-list'
+import TextAlign from '@tiptap/extension-text-align'
 
 // Connects to data-controller="editor"
 export default class extends Controller {
@@ -55,7 +56,10 @@ export default class extends Controller {
           nested: true
         }),
         Subscript,
-        Superscript
+        Superscript,
+        TextAlign.configure({
+          types: ['heading', 'paragraph']
+        })
       ],
       editable: true,
       injectCSS: false
@@ -137,5 +141,10 @@ export default class extends Controller {
 
   toggleSubscript() {
     this.editor.chain().focus().toggleSubscript().run()
+  }
+
+  toggleTextAlign({ params: { direction } }) {
+    console.log('Direction: ', direction)
+    this.editor.chain().focus().toggleTextAlign(direction).run()
   }
 }
