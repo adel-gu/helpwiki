@@ -1,98 +1,130 @@
-<div class="sticky top-0 z-10 border-b border-base-200">
-  <div class="mx-auto max-w-4xl px-4">
+<div class="sticky top-0 z-10 border-b border-base-200 bg-base-100 flex items-center px-2">
+  <div>Editing...</div>
+
+  <div class="mx-auto max-w-5xl px-4">
     <div class="flex items-center gap-1 py-2">
       <!-- Undo/Redo group-->
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom" data-tip="Undo" aria-label="Undo">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content" data-tip="Undo" aria-label="Undo" data-action="editor#undo">
         <span class="material-symbols-outlined">undo</span>
       </button>
-      <button class="btn btn-ghost btn-square btn-sm text-base-300 tooltip tooltip-bottom" data-tip="Redo" aria-label="Redo" disabled>
+      <button class="btn btn-ghost btn-square btn-sm text-base-300 tooltip tooltip-bottom hover:text-base-content" data-tip="Redo" aria-label="Redo" data-action="editor#redo">
         <span class="material-symbols-outlined">redo</span>
       </button>
 
       <div class="divider divider-horizontal divider-base mx-2"></div>
 
       <!--Heading Group-->
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom" data-tip="Heading 1" aria-label="Heading 1">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content" data-tip="Heading 1" aria-label="Heading 1">
         <span class="material-symbols-outlined">format_h1</span>
       </button>
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom" data-tip="Heading 2" aria-label="Heading 2">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content" data-tip="Heading 2" aria-label="Heading 2">
         <span class="material-symbols-outlined">format_h2</span>
       </button>
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom" data-tip="Heading 3" aria-label="Heading 3">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content" data-tip="Heading 3" aria-label="Heading 3">
         <span class="material-symbols-outlined">format_h3</span>
       </button>
 
       <div class="divider divider-horizontal mx-2"></div>
 
       <!-- Lists group -->
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom" data-tip="Bullet list" aria-label="Bullet list">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content" data-tip="Bullet list" aria-label="Bullet list">
         <span class="material-symbols-outlined">format_list_bulleted</span>
       </button>
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom" data-tip="Ordered list" aria-label="Ordered list">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content" data-tip="Ordered list" aria-label="Ordered list">
         <span class="material-symbols-outlined">format_list_numbered</span>
       </button>
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom" data-tip="Check list" aria-label="Check list">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content" data-tip="Check list" aria-label="Check list">
         <span class="material-symbols-outlined">checklist</span>
+      </button>
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content" data-tip="Blockquote" aria-label="Blockquote">
+        <span class="material-symbols-outlined">format_indent_increase</span>
       </button>
 
       <div class="divider divider-horizontal mx-2"></div>
 
       <!-- Formatting group -->
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom" data-tip="Bold" aria-label="Bold">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content" data-tip="Bold" aria-label="Bold" data-action="editor#toggleBold">
         <span class="material-symbols-outlined">format_bold</span>
       </button>
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom"
-      data-tip="Italic" aria-label="Italic">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content"
+      data-tip="Italic" aria-label="Italic" data-action="editor#toggleItalic">
         <span class="material-symbols-outlined">format_italic</span>
       </button>
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom"
-      data-tip="Strikethrough" aria-label="Strikethrough">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content"
+      data-tip="Strikethrough" aria-label="Strikethrough" data-action="editor#toggleStrike">
         <span class="material-symbols-outlined">strikethrough_s</span>
       </button>
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom"
-      data-tip="Code" aria-label="Code">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content"
+      data-tip="Code" aria-label="Code" data-action="editor#toggleCode">
         <span class="material-symbols-outlined">code</span>
       </button>
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom"
-      data-tip="Underline" aria-label="Underline">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content"
+      data-tip="Underline" aria-label="Underline" data-action="editor#toggleUnderline">
         <span class="material-symbols-outlined">format_underlined</span>
       </button>
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom"
-      data-tip="Link" aria-label="Link">
-        <span class="material-symbols-outlined">link</span>
-      </button>
+
+      <div class="dropdown dropdown-center">
+        <button
+          tabindex="0"
+          class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content"
+          data-tip="Link"
+          aria-label="Link"
+          data-action="click->editor#showLinkInput"
+        >
+          <span class="material-symbols-outlined">link</span>
+        </button>
+
+        <ul tabindex="-1" class="dropdown-content bg-base-100 rounded-box z-1 p-2 shadow-sm">
+          <li class="flex items-center gap-x-1">
+            <input type="text" placeholder="Insert link" class="focus:outline-none" data-editor-target="linkInput"/>
+
+            <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl" data-action="editor#toggleLink">
+              <span class="material-symbols-outlined">
+                keyboard_return
+              </span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
 
       <div class="divider divider-horizontal mx-2"></div>
 
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom" data-tip="Superscript" aria-label="Superscript">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content" data-tip="Superscript" aria-label="Superscript" data-action="editor#toggleSuperscript">
         <span class="material-symbols-outlined">superscript</span>
       </button>
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom" data-tip="Subscript" aria-label="Subscript">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content" data-tip="Subscript" aria-label="Subscript" data-action="editor#toggleSubscript">
         <span class="material-symbols-outlined">subscript</span>
       </button>
 
       <div class="divider divider-horizontal mx-2"></div>
 
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom" data-tip="Align left" aria-label="Align left">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content" data-tip="Align left" aria-label="Align left">
         <span class="material-symbols-outlined">format_align_left</span>
       </button>
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom" data-tip="Align center" aria-label="Align center">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content" data-tip="Align center" aria-label="Align center">
         <span class="material-symbols-outlined">format_align_center</span>
       </button>
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom" data-tip="Align right" aria-label="Align right">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content" data-tip="Align right" aria-label="Align right">
         <span class="material-symbols-outlined">format_align_right</span>
       </button>
-      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom" data-tip="Align justify" aria-label="Align justify">
+      <button class="btn btn-ghost btn-square btn-sm text-secondary rounded-xl tooltip tooltip-bottom hover:text-base-content" data-tip="Align justify" aria-label="Align justify">
         <span class="material-symbols-outlined">format_align_justify</span>
       </button>
 
       <div class="divider divider-horizontal mx-2"></div>
 
-      <button class="btn btn-ghost btn-sm text-secondary rounded-xl tooltip tooltip-bottom px-2" aria-label="Add image">
+      <button class="btn btn-ghost btn-sm text-secondary rounded-xl tooltip tooltip-bottom px-2 hover:text-base-content" aria-label="Add image">
         <span class="material-symbols-outlined">add_photo_alternate</span>
         <span>Add</span>
       </button>
 
     </div>
+  </div>
+
+  <div>
+    <button>Request changes</button>
+    <button>Approve and publish</button>
+    <button>...</button>
   </div>
 </div>

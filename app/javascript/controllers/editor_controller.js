@@ -1,10 +1,12 @@
 import { Controller } from '@hotwired/stimulus'
 import { Editor } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
+import Subscript from '@tiptap/extension-subscript'
+import Superscript from '@tiptap/extension-superscript'
 
 // Connects to data-controller="editor"
 export default class extends Controller {
-  static targets = ['content']
+  static targets = ['content', 'linkInput']
   initialize() {
     this.editor = new Editor({
       element: this.contentTarget,
@@ -45,9 +47,56 @@ export default class extends Controller {
       — Mom
     </blockquote>
   `,
-      extensions: [StarterKit],
+      extensions: [StarterKit, Subscript, Superscript],
       editable: true,
       injectCSS: false
     })
+  }
+
+  // Undo/Redo
+  undo() {
+    this.editor.chain().focus().undo().run()
+  }
+
+  redo() {
+    this.editor.chain().focus().redo().run()
+  }
+
+  // Formatting
+  toggleBold() {
+    this.editor.chain().focus().toggleBold().run()
+  }
+
+  toggleItalic() {
+    this.editor.chain().focus().toggleItalic().run()
+  }
+
+  toggleStrike() {
+    this.editor.chain().focus().toggleStrike().run()
+  }
+
+  toggleCode() {
+    this.editor.chain().focus().toggleCode().run()
+  }
+
+  toggleUnderline() {
+    this.editor.chain().focus().toggleUnderline().run()
+  }
+
+  toggleLink() {
+    this.editor
+      .chain()
+      .focus()
+      .toggleLink({ href: this.linkInputTarget.value, target: '_blank' })
+      .run()
+  }
+
+  toggleSuperscript() {
+    console.log('SuperScript')
+    this.editor.chain().focus().toggleSuperscript().run()
+  }
+
+  toggleSubscript() {
+    this.editor.chain().focus().toggleSubscript().run()
   }
 }
