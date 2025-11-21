@@ -20,7 +20,7 @@ class App::ArticlesController < App::BaseController
     if @article.update(article_params)
       respond_to do |format|
         format.html { redirect_to edit_app_article_path(@article) }
-        format.json { head :ok }
+        format.json { render json: @article, status: :ok }
       end
     else
       respond_to do |format|
