@@ -1,9 +1,7 @@
 <% content_for :title, "Editor" %>
 
-<section class="pl-8">
+<section data-controller="editor">
+  <%= render 'toolbar' %>
 
-  <div class="grid grid-cols-12 border">
-    <%= render "category", article: @article %>
-    <%= render "editor", article: @article %>
-  </div>
+  <div data-editor-target="content" class="mx-auto max-w-5xl"></div>
 </section>
