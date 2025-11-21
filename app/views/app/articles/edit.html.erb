@@ -1,7 +1,13 @@
 <% content_for :title, "Editor" %>
 
-<section data-controller="editor">
+<section
+  data-controller="editor"
+  data-editor-article-content="<%= @article.content.to_s %>"
+  data-editor-url-value="<%= app_article_path(@article) %>">
+
   <%= render 'toolbar' %>
+
+  <h1>Article Title</h1>
 
   <div data-editor-target="content" class="mx-auto max-w-5xl"></div>
 </section>
