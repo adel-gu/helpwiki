@@ -3,6 +3,7 @@ import { Editor } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 import Subscript from '@tiptap/extension-subscript'
 import Superscript from '@tiptap/extension-superscript'
+import { TaskList, TaskItem } from '@tiptap/extension-list'
 
 // Connects to data-controller="editor"
 export default class extends Controller {
@@ -47,7 +48,15 @@ export default class extends Controller {
       — Mom
     </blockquote>
   `,
-      extensions: [StarterKit, Subscript, Superscript],
+      extensions: [
+        StarterKit,
+        TaskList,
+        TaskItem.configure({
+          nested: true
+        }),
+        Subscript,
+        Superscript
+      ],
       editable: true,
       injectCSS: false
     })
@@ -66,11 +75,30 @@ export default class extends Controller {
   toggleHeading_1() {
     this.editor.chain().focus().toggleHeading({ level: 1 }).run()
   }
+
   toggleHeading_2() {
     this.editor.chain().focus().toggleHeading({ level: 2 }).run()
   }
+
   toggleHeading_3() {
     this.editor.chain().focus().toggleHeading({ level: 3 }).run()
+  }
+
+  // Lists
+  toggleBulletList() {
+    this.editor.chain().focus().toggleBulletList().run()
+  }
+
+  toggleOrderedList() {
+    this.editor.chain().focus().toggleOrderedList().run()
+  }
+
+  toggleTaskList() {
+    this.editor.chain().focus().toggleTaskList().run()
+  }
+
+  toggleBlockquote() {
+    this.editor.chain().focus().toggleBlockquote().run()
   }
 
   // Formatting
