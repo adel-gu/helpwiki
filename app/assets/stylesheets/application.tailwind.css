@@ -40,3 +40,40 @@
 @utility shadow-left {
   box-shadow: -6px 6px 12px rgba(0, 0, 0, 0.15);
 }
+
+@layer components {
+  /* List Container */
+  ul[data-type='taskList'] {
+    @apply list-none pl-0 m-0 border-none;
+  }
+
+  /* List Item (li) */
+  ul[data-type='taskList'] li {
+    @apply flex items-start my-2 gap-x-3;
+  }
+
+  /* Checkbox Container (label) */
+  ul[data-type='taskList'] li > label {
+    @apply flex items-center select-none mt-[0.2em];
+  }
+
+  /* The Checkbox Input */
+  ul[data-type='taskList'] li > label input[type='checkbox'] {
+    @apply checkbox checkbox-md checkbox-secondary rounded-sm;
+  }
+
+  /* Content Wrapper (div) */
+  ul[data-type='taskList'] li > div {
+    @apply flex-1 min-w-0;
+  }
+
+  /* Text Content (p) */
+  .prose ul[data-type='taskList'] li > div > p {
+    @apply my-0!;
+  }
+
+  /* "Checked" State */
+  ul[data-type='taskList'] li[data-checked='true'] > div > p {
+    @apply text-base-content/50 line-through decoration-base-content/50 transition-all duration-200;
+  }
+}
