@@ -62,6 +62,17 @@ export default class extends Controller {
     this.editor.chain().focus().redo().run()
   }
 
+  // Headings
+  toggleHeading_1() {
+    this.editor.chain().focus().toggleHeading({ level: 1 }).run()
+  }
+  toggleHeading_2() {
+    this.editor.chain().focus().toggleHeading({ level: 2 }).run()
+  }
+  toggleHeading_3() {
+    this.editor.chain().focus().toggleHeading({ level: 3 }).run()
+  }
+
   // Formatting
   toggleBold() {
     this.editor.chain().focus().toggleBold().run()
