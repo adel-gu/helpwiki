@@ -11,10 +11,15 @@ import TextAlign from '@tiptap/extension-text-align'
 // Connects to data-controller="editor"
 export default class extends Controller {
   static values = { url: String }
-  static targets = ['content', 'linkInput']
+  static targets = ['content', 'linkInput', 'title']
 
   initialize() {
-    this.debouncedAutoSave = debounce(this.autoSave.bind(this), 2500)
+    this.debouncedContentAutoSave = debounce(
+      this.contentAutoSave.bind(this),
+      2500
+    )
+
+    this.debouncedTitleAutoSave = debounce(this.titleAutoSave.bind(this), 2500)
 
     this.editor = new Editor({
       element: this.contentTarget,
@@ -39,12 +44,34 @@ export default class extends Controller {
       ],
       editable: true,
       injectCSS: false,
-      onUpdate: ({ editor }) => this.debouncedAutoSave(editor.getHTML())
+      onUpdate: ({ editor }) => this.debouncedContentAutoSave(editor.getHTML())
     })
   }
 
-  // Auto save
-  async autoSave(htmlContent) {
+  // Title autosave
+  onTitleInput() {
+    this.debouncedTitleAutoSave()
+  }
+
+  titleAutoSave() {
+    const titleValue = this.titleTarget.value
+    console.log('Title: ', titleValue)
+    this._updateArticle({ title: titleValue })
+  }
+
+  preventEnterInTitle(event) {
+    if (event.key === 'Enter') {
+      event.preventDefault()
+      this.editor.commands.focus('start')
+    }
+  }
+
+  // Content autosave
+  contentAutoSave(htmlContent) {
+    this._updateArticle({ content: htmlContent })
+  }
+
+  async _updateArticle(payload) {
     try {
       const response = await fetch(this.urlValue, {
         method: 'PATCH',
@@ -53,11 +80,11 @@ export default class extends Controller {
           'Content-Type': 'application/json',
           'X-CSRF-Token': document.querySelector("[name='csrf-token']").content
         },
-        body: JSON.stringify({ article: { content: htmlContent } })
+        body: JSON.stringify({ article: payload })
       })
 
       if (response.ok) {
-        console.log('Saved...')
+        console.log('Saved...', Object.keys(payload))
       } else {
         const errorData = await response.json()
         console.log('Save failed: ', errorData)

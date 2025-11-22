@@ -1,0 +1,11 @@
+<%= form_with model: article, url: app_article_path(article), class: "max-w-5xl mx-auto" do |form| %>
+  <%= form.text_area :title,
+      placeholder: "Untitled",
+      autocomplete: "off",
+      class: "textarea textarea-ghost w-full text-7xl font-bold py-12 placeholder:text-base-300 focus:outline-none resize-none overflow-hidden leading-tight",
+      data: {
+        editor_target: "title",
+        action: "input->editor#onTitleInput keydown->editor#preventEnterInTitle"
+      }
+    %>
+<% end %>
