@@ -77,16 +77,8 @@ export default class extends Controller {
   }
 
   // Headings
-  toggleHeading_1() {
-    this.editor.chain().focus().toggleHeading({ level: 1 }).run()
-  }
-
-  toggleHeading_2() {
-    this.editor.chain().focus().toggleHeading({ level: 2 }).run()
-  }
-
-  toggleHeading_3() {
-    this.editor.chain().focus().toggleHeading({ level: 3 }).run()
+  toggleHeading({ params: { level } }) {
+    this.editor.chain().focus().toggleHeading({ level }).run()
   }
 
   // Lists
@@ -136,7 +128,6 @@ export default class extends Controller {
   }
 
   toggleSuperscript() {
-    console.log('SuperScript')
     this.editor.chain().focus().toggleSuperscript().run()
   }
 
@@ -145,7 +136,6 @@ export default class extends Controller {
   }
 
   toggleTextAlign({ params: { direction } }) {
-    console.log('Direction: ', direction)
     this.editor.chain().focus().toggleTextAlign(direction).run()
   }
 }
