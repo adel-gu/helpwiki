@@ -5,9 +5,11 @@
   data-editor-article-content="<%= @article.content.to_s %>"
   data-editor-url-value="<%= app_article_path(@article) %>">
 
-  <%= render 'toolbar' %>
+  <%= render "header" %>
 
   <%= render "title", article: @article %>
+
+  <%= render 'toolbar' %>
 
   <div data-editor-target="content" class="mx-auto max-w-5xl"></div>
 </section>
