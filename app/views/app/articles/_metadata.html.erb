@@ -10,8 +10,81 @@
     <label for="my-drawer-5" aria-label="close sidebar" class="drawer-overlay ">
 
     </label>
-    <ul class="bg-base-200 min-h-full w-1/2 p-4">
+    <div class="bg-base-200 min-h-full w-1/4 p-4">
       <!-- Sidebar content here -->
-    </ul>
+      <!-- name of each tab group should be unique -->
+      <div class="tabs tabs-border">
+        <input type="radio" name="my_tabs_2" class="tab" aria-label="Task Context" checked="checked" />
+        <div class="tab-content p-4 mt-6 space-y-12">
+          <div>
+            <h2 class="font-medium text-xl text-secondary mb-4 ">Task Details</h2>
+            <% if article.task_title.blank? && article.task_description.blank? %>
+              <div class="card bg-base-200 shadow-sm">
+                <div class="card-body items-center text-center">
+                  <h3 class="opacity-50 italic">No task details yet</h3>
+                  <p class="opacity-40">Add a title or description to get started.</p>
+                </div>
+              </div>
+            <% else %>
+              <div class="card bg-base-100 shadow-sm">
+                <div class="card-body">
+                  <h2 class="card-title"><%= article.task_title.presence || "Untitled task" %></h2>
+                  <p><%= article.task_description.presence || "No description provided." %></p>
+                </div>
+              </div>
+            <% end %>
+          </div>
+
+
+          <!-- Task comments -->
+          <div>
+            <h2 class="font-medium text-xl text-secondary mb-4 ">Task Comments</h2>
+            <div class="rounded-lg bg-base-100 h-96 shadow-sm px-4 pt-2">
+              <div class="chat chat-start">
+                <div class="chat-image avatar">
+                  <div class="w-10 rounded-full">
+                    <img
+                      alt="Tailwind CSS chat bubble component"
+                      src="https://img.daisyui.com/images/profile/demo/kenobee@192.webp"
+                    />
+                  </div>
+                </div>
+                <div class="chat-header">
+                  Obi-Wan Kenobi
+                  <time class="text-xs opacity-50">12:45</time>
+                </div>
+                <div class="chat-bubble">You were the Chosen One!</div>
+                <div class="chat-footer opacity-50">Delivered</div>
+              </div>
+              <div class="chat chat-end">
+                <div class="chat-image avatar">
+                  <div class="w-10 rounded-full">
+                    <img
+                      alt="Tailwind CSS chat bubble component"
+                      src="https://img.daisyui.com/images/profile/demo/anakeen@192.webp"
+                    />
+                  </div>
+                </div>
+                <div class="chat-header">
+                  Anakin
+                  <time class="text-xs opacity-50">12:46</time>
+                </div>
+                <div class="chat-bubble">I hate you!</div>
+                <div class="chat-footer opacity-50">Seen at 12:46</div>
+              </div>
+
+              <!-- Add Comment -->
+
+            </div>
+          </div>
+        </div>
+
+        <input type="radio" name="my_tabs_2" class="tab" aria-label="Tab 2" />
+        <div class="tab-content p-10">Tab content 2</div>
+
+        <input type="radio" name="my_tabs_2" class="tab" aria-label="Tab 3" />
+        <div class="tab-content p-10">Tab content 3</div>
+      </div>
+    </div>
   </div>
 </div>
