@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   # Articles this user created, is writing, or is reviewing
   has_many :created_articles, class_name: "Article", foreign_key: :creator_id, dependent: :nullify
+  has_many :comments, dependent: :destroy
   has_many :written_articles, class_name: "Article", foreign_key: :writer_id, dependent: :nullify
   has_many :reviewed_articles, class_name: "Article", foreign_key: :reviewer_id, dependent: :nullify
 

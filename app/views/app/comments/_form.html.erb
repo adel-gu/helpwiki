@@ -1,0 +1,28 @@
+<%= turbo_frame_tag "new_comment" do %>
+
+  <% if comment.errors.any? %>
+    <div class="text-red-500 text-sm space-y-1">
+      <% comment.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+      <% end %>
+    </div>
+  <% end %>
+
+  <%= form_with model: comment,
+                url: app_article_comments_path(article),
+                data: { controller: "comment-form", action: "turbo:submit-end->comment-form#reset" },
+                class: "flex flex-col gap-3 mt-4" do |form| %>
+
+    <%= form.hidden_field :comment_type, value: params[:comment_type] %>
+
+    <%= form.text_area :content,
+                       class: "textarea w-full border border-base-300 shadow-sm focus:outline-base-300",
+                       placeholder: "Type here...",
+                       autocomplete: "off" %>
+
+    <%= form.submit "Comment", class: "btn btn-primary w-fit ml-auto" %>
+
+  <% end %>
+
+<% end %>
+

@@ -5,7 +5,7 @@
   data-editor-article-content="<%= @article.content.to_s %>"
   data-editor-url-value="<%= app_article_path(@article) %>">
 
-  <%= render "header" %>
+  <%= render "header", article: @article %>
 
   <%= render "title", article: @article %>
 
