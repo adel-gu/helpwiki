@@ -9,6 +9,10 @@ class Article < ApplicationRecord
 
   has_many :article_versions, dependent: :destroy
   has_many :activity_logs, dependent: :destroy
+  has_many :comments, dependent: :destroy
+
+  has_many :task_comments, -> { where(comment_type: :task) }, class_name: "Comment"
+  has_many :inline_comments, -> { where(comment_type: :inline) }, class_name: "Comment"
 
   enum :status, { todo: 0, draft: 1, in_review: 2, published: 3, archived: 4 }
   enum :priority, { low: 0, medium: 1, high: 2 }

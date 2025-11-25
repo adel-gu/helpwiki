@@ -1,0 +1,15 @@
+<div id="<%= dom_id comment %>" class="chat <%= comment.user == current_user ? 'chat-end' : 'chat-start' %>">
+  <div class="chat-image avatar">
+    <div class="w-10 rounded-full">
+      <img
+        alt="<%= comment.user.full_name %>"
+        src="https://ui-avatars.com/api/?name=<%= comment.user.full_name %>&background=random"
+      />
+    </div>
+  </div>
+  <div class="chat-header">
+    <%= comment.user.full_name %>
+    <time class="text-xs opacity-50"><%= time_ago_in_words(comment.created_at) %> ago</time>
+  </div>
+  <div class="chat-bubble"><%= comment.content %></div>
+</div>
