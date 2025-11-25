@@ -4,6 +4,9 @@
 
 import { application } from "./application"
 
+import ChatAlignmentController from "./chat_alignment_controller"
+application.register("chat-alignment", ChatAlignmentController)
+
 import CommentFormController from "./comment_form_controller"
 application.register("comment-form", CommentFormController)
 

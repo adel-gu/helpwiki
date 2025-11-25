@@ -1,4 +1,7 @@
-<div id="<%= dom_id comment %>" class="chat <%= comment.user == current_user ? 'chat-end' : 'chat-start' %>">
+<div id="<%= dom_id comment %>"
+    data-chat-alignment-target="taskComment"
+    data-author-id="<%= comment.user_id %>"
+    class="chat">
   <div class="chat-image avatar">
     <div class="w-10 rounded-full">
       <img
