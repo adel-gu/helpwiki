@@ -55,7 +55,6 @@ export default class extends Controller {
 
   titleAutoSave() {
     const titleValue = this.titleTarget.value
-    console.log('Title: ', titleValue)
     this._updateArticle({ title: titleValue })
   }
 
