@@ -2,7 +2,7 @@
   <%= form.text_area :title,
       placeholder: "Untitled",
       autocomplete: "off",
-      class: "textarea textarea-ghost border-none p-0 w-full text-7xl font-bold placeholder:text-base-300 focus:outline-none resize-none overflow-hidden leading-tight",
+      class: "textarea textarea-ghost border-none p-0 w-full [field-sizing:content] min-h-[1lh] text-7xl font-bold placeholder:text-base-300 focus:outline-none resize-none overflow-hidden leading-tight",
       data: {
         editor_target: "title",
         action: "input->editor#onTitleInput keydown->editor#preventEnterInTitle"
