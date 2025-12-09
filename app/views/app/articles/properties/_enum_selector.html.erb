@@ -1,0 +1,58 @@
+<%#
+  Arguments:
+  - form: The form builder
+  - article: The record
+  - attribute: Symbol (e.g., :status, :priority)
+  - label: String (e.g., "Status")
+  - icon: String (Material Symbol)
+  - options: Array (The array of options for the select [[Label, Value], ...])
+  - color_map: Hash (Mapping values to badge classes: { 'high' => 'badge-error' })
+  - include_blank: String/Boolean (Optional, e.g., "Empty" or false. Default: false)
+%>
+
+<%
+  # Defaults
+  include_blank ||= false
+  current_value = article.public_send(attribute)
+
+  # Determine Badge Class
+  # 1. Look up value in color_map
+  # 2. Fallback to 'badge-ghost' if not found
+  badge_class = color_map[current_value] || 'badge-ghost'
+%>
+
+<%# --- Column 1: Label --- %>
+<div class="flex items-center gap-2 text-base-content/60 py-1.5">
+  <span class="material-symbols-outlined text-[18px]"><%= icon %></span>
+  <span><%= label %></span>
+</div>
+
+<%# --- Column 2: Value --- %>
+<div class="relative group hover:bg-base-300 rounded px-1 -ml-1 transition-colors h-8 flex items-center">
+
+  <%# A. Visual Layer %>
+  <% if current_value.present? %>
+
+    <%# STATE 1: Badge %>
+    <div class="badge <%= badge_class %> gap-1 border-0 font-medium">
+      <span class="size-1.5 rounded-full bg-current opacity-60"></span>
+      <%= current_value.humanize %>
+    </div>
+
+  <% else %>
+
+    <%# STATE 2: Placeholder %>
+    <span class="text-base-content/40 pl-1 select-none">
+      <%= include_blank.is_a?(String) ? include_blank : "Empty" %>
+    </span>
+
+  <% end %>
+
+  <%# B. Functional Layer (Invisible Select) %>
+  <%= form.select attribute,
+      options,
+      { include_blank: include_blank },
+      class: "select select-ghost absolute inset-0 w-full h-full opacity-0 cursor-pointer",
+      onchange: "this.form.requestSubmit();" %>
+
+</div>
