@@ -1,5 +1,5 @@
 <input type="radio" name="article_metadata" role="tab" class="tab" aria-label="Properties" checked />
-<div role="tabpanel" class="tab-content bg-base-100 border-base-300 rounded-box p-6">
+<div role="tabpanel" class="tab-content rounded-box p-4 mt-6">
 
   <%= form_with model: article,
       url: app_article_path(article),
@@ -10,38 +10,73 @@
     <!-- GRID CONTAINER -->
     <div class="grid grid-cols-[140px_1fr] items-center gap-y-1 text-sm">
 
-      <%# --- 1. STATUS (Enum) --- %>
-      <%= render "app/articles/properties/status", form: form, article: article %>
-
-      <%# --- 2. PRIORITY (Enum) --- %>
-      <%= render "app/articles/properties/priority", form: form, article: article %>
-
-      <%# --- 3. REVIEWER (User Association) --- %>
-      <div class="flex items-center gap-2 text-base-content/60 py-1.5">
-        <span class="material-symbols-outlined text-[18px]">person_check</span>
-        <span>Reviewer</span>
-      </div>
-      <div class="hover:bg-base-200 rounded px-1 -ml-1 transition-colors">
-        <%# Assuming User has a 'name' attribute %>
-        <%= form.collection_select :reviewer_id,
-            User.all, :id, :full_name,
-            { include_blank: "Empty" },
-            class: "select select-ghost select-xs w-full font-normal focus:bg-base-200 focus:outline-none h-8 min-h-0 pl-1" %>
-      </div>
-
-      <%# --- 4. CATEGORY (Association) --- %>
+      <%# --- 1. CATEGORY (Association) --- %>
       <div class="flex items-center gap-2 text-base-content/60 py-1.5">
         <span class="material-symbols-outlined text-[18px]">category</span>
         <span>Category</span>
       </div>
-      <div class="hover:bg-base-200 rounded px-1 -ml-1 transition-colors">
+      <div class="hover:bg-base-200 rounded px-1 -ml-1 transition-colors font-bold">
         <%= form.collection_select :category_id,
             Category.all, :id, :name,
             { include_blank: "No Category" },
-            class: "select select-ghost select-xs w-full font-normal focus:bg-base-200 focus:outline-none h-8 min-h-0 pl-1" %>
+            class: "select select-ghost w-full font-semibold pl-1 hover:cursor-pointer",
+            onchange: "this.form.requestSubmit();" %>
       </div>
 
-      <%# --- 5. DUE DATE --- %>
+      <%# --- DIVIDER --- %>
+      <div class="col-span-2 divider"></div>
+
+      <%# --- 3. writer (User Association) --- %>
+      <%= render "app/articles/properties/user_property",
+            form: form,
+            attribute: :writer_id,
+            label: "Writer",
+            icon: "article_person",
+            collection: User.all %>
+
+      <%# --- 3. REVIEWER (User Association) --- %>
+      <%= render "app/articles/properties/user_property",
+            form: form,
+            attribute: :reviewer_id,
+            label: "Reviewer",
+            icon: "person_check",
+            collection: User.all %>
+
+      <%# --- DIVIDER --- %>
+      <div class="col-span-2 divider"></div>
+
+      <%# --- 1. STATUS (Enum) --- %>
+      <%= render "app/articles/properties/enum_selector",
+          form: form,
+          article: article,
+          attribute: :status,
+          label: "Status",
+          icon: "dataset",
+          include_blank: false,
+          options: Article.statuses.keys.map { |k| [k.humanize, k] },
+          color_map: {
+            'published' => 'badge-success text-success-content',
+            'in_review' => 'badge-warning text-warning-content',
+            'archived'  => 'badge-neutral text-neutral-content',
+            'draft'     => 'badge-info',
+          } %>
+
+      <%# --- 2. PRIORITY (Enum) --- %>
+      <%= render "app/articles/properties/enum_selector",
+          form: form,
+          article: article,
+          attribute: :priority,
+          label: "Priority",
+          icon: "flag",
+          include_blank: "Empty",
+          options: Article.priorities.keys.map { |k| [k.humanize, k] },
+          color_map: {
+            'high'   => 'badge-error text-error-content',
+            'medium' => 'badge-warning text-warning-content',
+            'low'    => 'badge-ghost text-base-content'
+          } %>
+
+      <%# --- 3. DUE DATE --- %>
       <div class="flex items-center gap-2 text-base-content/60 py-1.5">
         <span class="material-symbols-outlined text-[18px]">calendar_today</span>
         <span>Due Date</span>
@@ -52,17 +87,16 @@
       </div>
 
       <%# --- DIVIDER --- %>
-      <div class="col-span-2 border-t border-base-200 my-2"></div>
+      <div class="col-span-2 divider"></div>
 
       <%# --- READ ONLY: Creator --- %>
-      <div class="flex items-center gap-2 text-base-content/60 py-1.5">
-        <span class="material-symbols-outlined text-[18px]">account_circle</span>
-        <span>Creator</span>
-      </div>
-      <div class="px-1 py-1.5 text-base-content truncate">
-        <%# Use safe navigation in case creator is deleted %>
-        <%= article.creator&.full_name || "Unknown" %>
-      </div>
+      <%= render "app/articles/properties/user_property",
+            form: form,
+            attribute: :creator_id,
+            label: "Creator",
+            icon: "account_circle",
+            readonly: true
+            %>
 
       <%# --- READ ONLY: Created At --- %>
       <div class="flex items-center gap-2 text-base-content/60 py-1.5">
@@ -83,10 +117,5 @@
       </div>
 
     </div>
-
-    <!-- Hidden submit button for non-JS fallback or explicit save if desired -->
-    <noscript>
-        <button class="btn btn-primary btn-sm mt-4 w-full">Update Properties</button>
-    </noscript>
   <% end %>
 </div>
