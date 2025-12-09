@@ -37,6 +37,6 @@ class App::ArticlesController < App::BaseController
     end
 
     def article_params
-      params.expect(article: [ :title, :content, :category_id, :status, :priority ])
+      params.expect(article: [ :title, :content, :category_id, :status, :priority, :reviewer_id, :writer_id, :due_date ])
     end
 end
