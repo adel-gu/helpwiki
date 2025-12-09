@@ -1,0 +1,37 @@
+<input type="radio" name="article_metadata" class="tab" aria-label="Task Context" checked="checked" />
+<div class="tab-content p-4 mt-6 space-y-12">
+  <div>
+    <h2 class="font-medium text-xl text-secondary mb-4 ">Task Details</h2>
+    <% if article.task_title.blank? && article.task_description.blank? %>
+      <div class="card bg-base-200 shadow-sm">
+        <div class="card-body items-center text-center">
+          <h3 class="opacity-50 italic">No task details yet</h3>
+          <p class="opacity-40">Add a title or description to get started.</p>
+        </div>
+      </div>
+    <% else %>
+      <div class="card bg-base-100 shadow-sm">
+        <div class="card-body">
+          <h2 class="card-title"><%= article.task_title.presence || "Untitled task" %></h2>
+          <p><%= article.task_description.presence || "No description provided." %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+
+  <!-- Task comments -->
+  <div>
+    <!-- Listen to comment creation broadcast -->
+    <%= turbo_stream_from article %>
+    <h2 class="font-medium text-xl text-secondary mb-4 ">Task Comments</h2>
+    <div id="task_comments"
+          class="rounded-lg bg-base-100 border border-base-300 h-96 shadow-sm p-4 overflow-y-auto"
+          data-controller="chat-alignment"
+          data-chat-alignment-current-user-id-value="<%= current_user.id %>">
+      <%= render article.task_comments %>
+    </div>
+
+    <%= turbo_frame_tag "new_comment", src: new_app_article_comment_path(article, comment_type: :task) %>
+  </div>
+</div>
