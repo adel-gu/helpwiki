@@ -1,0 +1,62 @@
+<%#
+  Arguments needed:
+  - form: The form builder object
+  - attribute: The foreign key symbol (e.g., :reviewer_id)
+  - label: The display label (e.g., "Reviewer")
+  - icon: The material symbol name (e.g., "person_check")
+  - collection: The users to select from (usually User.all)
+  - readonly: (Optional) Boolean, defaults to false
+%>
+
+<%
+  # 1. Introspect the association to get the actual User object
+  # If attribute is :reviewer_id, we look for .reviewer on the article
+  association_name = attribute.to_s.sub(/_id$/, '')
+  current_user = form.object.public_send(association_name)
+
+  readonly ||= false
+%>
+
+<%# --- Column 1: Label --- %>
+<div class="flex items-center gap-2 text-base-content/60 py-1.5">
+  <span class="material-symbols-outlined text-[18px]"><%= icon %></span>
+  <span><%= label %></span>
+</div>
+
+<%# --- Column 2: Value --- %>
+<div class="relative group hover:bg-base-300 rounded px-1 -ml-1 transition-colors h-8 flex items-center">
+
+  <%# A. Visual Layer: Avatar + Name OR Placeholder %>
+  <div class="flex items-center gap-2 w-full overflow-hidden">
+    <% if current_user.present? %>
+
+      <!-- Avatar -->
+      <div class="avatar avatar-placeholder">
+        <div class="text-neutral-content w-6 rounded-full">
+          <%= image_tag("https://ui-avatars.com/api/?name=#{current_user.full_name}&background=random&color=fff",
+              alt: current_user.full_name,
+              class: "rounded-full object-cover flex-shrink-0") %>
+        </div>
+      </div>
+
+      <!-- Name -->
+      <span class="truncate text-base-content"><%= current_user.full_name %></span>
+
+    <% else %>
+
+      <!-- Empty Placeholder -->
+      <span class="text-base-content/40 pl-1 select-none">Empty</span>
+
+    <% end %>
+  </div>
+
+  <%# B. Functional Layer: The Select (Only if not readonly) %>
+  <% unless readonly %>
+    <%= form.collection_select attribute,
+        collection, :id, :full_name,
+        { include_blank: "Empty" }, # Allows setting back to nil
+        class: "select select-ghost absolute inset-0 w-full h-full opacity-0 cursor-pointer",
+        onchange: "this.form.requestSubmit();" %>
+  <% end %>
+
+</div>
